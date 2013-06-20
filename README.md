@@ -14,26 +14,26 @@ hidden data.  The class culminates in a fun two team competition.
 
 This is in flux and not finalized (it may even change during the course).
 
-Day 1   -   Overview and Tools of the Trade 
-Day 2   -   Passwords, Hashing, Rainbow Tables, and Cracking
-Day 3   -   Deploying Viruses, Backdoors, and Hiding from Anti-Virus
-Day 4   -   Buffer Overflows, SQL Injection, and Stealing what's not Yours
-Day 5   -   Phreaking, Social Engineering, and Finding the Weakest Link
-
-Day 6   -   Watching for Intrusions: Logs, Hash Matching, Tripwire, 
-Day 7   -   Eliminating Intrusions: Firewalls, Public Key Cryptography, 
-Day 8   -   Dealing with Intrusions: Freeze System, Scan Disk, Point of Entry
-Day 9   -   Low-Level FAT32 Exploration with Hexdump
-Day 10  -   Recovering Hidden FAT32 Files
-
-Day 11  -   Perfect Cryptography is Easy, and so is Steganography
-Day 12  -   Diffie-Hellman Key Exchange
-Day 13  -   Detecting Digital Image Alterations 
-Day 14  -   Red Team vs Blue Team
-Day 15  -   Wrap-up
+<table>
+    <tr><td>Day 1</td><td>Overview and Tools of the Trade</td></tr>
+    <tr><td>Day 2</td><td>Passwords, Hashing, Rainbow Tables, and Cracking</td></tr>
+    <tr><td>Day 3</td><td>Deploying Viruses, Backdoors, and Hiding from Anti-Virus</td></tr>
+    <tr><td>Day 4</td><td>Buffer Overflows, SQL Injection, and Stealing what's not Yours</td></tr>
+    <tr><td>Day 5</td><td>Phreaking, Social Engineering, and Finding the Weakest Link</td></tr>
+    <tr><td>Day 6</td><td>Watching for Intrusions: Logs, Hash Matching, Tripwire, </td></tr>
+    <tr><td>Day 7</td><td>Eliminating Intrusions: Firewalls, Public Key Cryptography, </td></tr>
+    <tr><td>Day 8</td><td>Dealing with Intrusions: Freeze System, Scan Disk, Point of Entry</td></tr>
+    <tr><td>Day 9</td><td>Low-Level FAT32 Exploration with Hexdump</td></tr>
+    <tr><td>Day 10</td><td>Recovering Hidden FAT32 Files</td></tr>
+    <tr><td>Day 11</td><td>Perfect Cryptography is Easy, and so is Steganography</td></tr>
+    <tr><td>Day 12</td><td>Diffie-Hellman Key Exchange</td></tr>
+    <tr><td>Day 13</td><td>Detecting Digital Image Alterations </td></tr>
+    <tr><td>Day 14</td><td>Red Team vs Blue Team</td></tr>
+    <tr><td>Day 15</td><td>Wrap-up</td></tr>
+</table>
 
 ## License
 
 All course materials and code are released under the MIT License.  Please see
-the [LICENSE](https://github.com/cmu-sams13-cyber-security/blob/master/LICENSE)
+the [LICENSE](https://github.com/theonewolf/cmu-sams13-cyber-security/blob/master/LICENSE)
 file for more details.
