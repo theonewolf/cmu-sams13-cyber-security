@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 1: Overview of Cyber Security and Tools of the Trade</title>
+
+		<meta name="description" content="Introduction for SAMS 2013 Cyber Security class at CMU">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Overview and Tools of the Trade</h3>
+					<p>
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+				</section>
+				<section>
+					<h1>Who am I?</h1>
+                    <img src="dt100516shct.jpg" class="fragment">
+				</section>
+				<section>
+                <p>I consider myself an <a href="">experimental computer
+                    scientist</a>, and work primarily on <a href="https://en.wikipedia.org/wiki/Distributed_computing">distributed systems</a>
+                and <a href="https://en.wikipedia.org/wiki/Cloud_computing">cloud computing</a>.</p>
+                <img src="google-datacenter.jpg" class="fragment">
+				</section>
+                <section>
+                <h2>Contact, Website</h2>
+                <p><a href="mailto:wolf@cs.cmu.edu">wolf@cs.cmu.edu</a></p>
+                <p>Open source course materials: <a href="https://github.com/theonewolf/cmu-sams13-cyber-security">https://github.com/theonewolf/cmu-sams13-cyber-security</a></p>
+                </section>
+                <section>
+                <h1>Poll 0</h1>
+                <ul>
+                    <li>Who are you/your background?</li>
+                    <li>First pick?</li>
+                    <li>What do you expect to learn?</li>
+                </ul>
+                </section>
+                <section>
+                <h2>Project/Class Format</h2>
+                <p style="color:red;">I have a syllabus, but it is <b>completely up to you</b>.</p>
+                </section>
+                <section>
+                <h2>Meta-Lesson 1: <b>Attacking</b></h2>
+<table>
+<tr>
+<td> 1</td>
+<td>Overview and Tools of the Trade</td>
+</tr>
+<tr>
+<td> 2</td>
+<td>Passwords, Hashing, Rainbow Tables, and Cracking</td>
+</tr>
+<tr>
+<td> 3</td>
+<td>Deploying Viruses, Backdoors, and Hiding from Anti-Virus</td>
+</tr>
+<tr>
+<td> 4</td>
+<td>Buffer Overflows, SQL Injection, and Stealing what's not Yours</td>
+</tr>
+<tr>
+<td> 5</td>
+<td>Phreaking, Social Engineering, and Finding the Weakest Link</td>
+</tr>
+</table>
+                </section>
+                <section>
+                <h2>Meta-Lesson 2: <b>Defending</b></h2>
+                <table>
+<tr>
+<td> 6</td>
+<td>Watching for Intrusions: Logs, Hash Matching, Tripwire, </td>
+</tr>
+<tr>
+<td> 7</td>
+<td>Eliminating Intrusions: Firewalls, Public Key Cryptography, </td>
+</tr>
+<tr>
+<td> 8</td>
+<td>Dealing with Intrusions: Freeze System, Scan Disk, Point of Entry</td>
+</tr>
+<tr>
+<td> 9</td>
+<td>Bayesian Classification and Machine Learning (Weak AI)</td>
+</tr>
+<tr>
+<td> 10</td>
+<td>Detecting Spam with a Bayesian Classifier</td>
+</tr>
+
+                </table>
+                </section>
+                <section>
+                <h2>Meta-Lesson 3: <b>Cryptography</b></h2>
+<table>
+<tr>
+<td> 11</td>
+<td>Perfect Cryptography is Easy, and so is Steganography</td>
+</tr>
+<tr>
+<td> 12</td>
+<td>Diffie-Hellman Key Exchange</td>
+</tr>
+<tr>
+<td> 13</td>
+<td>Red Team vs Blue Team</td>
+</tr>
+<tr>
+<td> 14</td>
+<td>Wrap-up</td>
+</tr>
+<tr>
+<td> 15</td>
+<td>Buffer  (July 4 or final day off)</td>
+</tr>
+</table>
+                </section>
+                <section>
+                    <h3>Do you take the blue pill or the red pill?</h3>
+                    <h2 class="fragment" style="color: red;">Your answer should be both!</h2>
+                    <img src="pills.jpg">
+                </section>
+                <section>
+                <blockquote style="text-align: justify;"><b>If you know the
+                        enemy and know yourself, you need not fear the result
+                        of a hundred battles.</b> If you know yourself but not
+                    the enemy, for every victory gained you will also suffer a
+                    defeat. If you know neither the enemy nor yourself, you
+                    will succumb in every battle</blockquote>
+                <p style="text-align:right;">- Sun Tzu, The Art of War</p>
+                </section>
+                <section>
+                <h2>Yes, war</h2>
+                    <blockquote style="text-align:justify;">
+                    Petraeus said cyber threats may soon rank alongside
+                    terrorist threats as top challenges to our security. He
+                    also noted the implications of the IT revolution for the
+                    Agency, highlighting initiatives in the areas of digital
+                    identity and big data.
+                    </blockquote>
+                    <p style="text-align:right;"><a href="http://www.hss.cmu.edu/pressreleases/pressreleases/ciadirector.html">Source</a></p>
+                    <img src="prism.png">
+                </section>
+                <section>
+                <h1>But, it's also fun!</h1>
+                <ul>
+                    <li>How to take control of another computer</li>
+                    <li>How to infiltrate computer systems</li>
+                    <li>How to coordinate thousands of 'bots'</li>
+                    <li>How to intercept digital communications</li>
+                    <li>How to crack passwords</li>
+                </ul>
+                </section>
+                <section>
+                <h2>White, black, and grey hats...</h2>
+                <img src="fedora_white.png">
+                <img width="200px" src="black_fedora.jpg">
+                <img width="150px" src="grey_fedora.jpg">
+                <h1 style="color:red;" class="fragment">Goal: become a white hat hacker</h1>
+                </section>
+                <section>
+                <p style="text-align:justify;">You must learn the techniques of
+                a black hat hacker, if only to test your own defenses.</p>
+                </section>
+                <section>
+                <h1>High Expectations</h1>
+                <p>Of you</p>
+                <p>And, by extension, of me</p>
+                </section>
+                <section>
+                <p>We will:</p>
+                <ul>
+                    <li>Learn, hack and defend against each other</li>
+                    <li>Learn and program in <a href="http://www.python.org/">Python</a></li>
+                    <li>Learn version control with <a href="http://git-scm.com/">Git</a></li>
+                    <li>Learn the <a href="http://ridiculousfish.com/shell/">fish</a> shell</li>
+                    <li>Use tools like <a href="https://www.dropbox.com/">Dropbox</a> and <a href="https://github.com/">Github</a> to collaborate</li>
+                    <li>Have fun</li>
+                </ul>
+                <h2 class="fragment">We will move fast!</h2>
+                <h2 class="fragment">I expect you to keep up.</h2>
+                </section>
+                <section>
+                <h1>Poll 1</h1>
+                <ul>
+                    <li>Linux</li>
+                    <li>Programming</li>
+                    <li>Hacking</li>
+                    <li>Email</li>
+                    <li>Shell scripting</li>
+                    <li>Dropbox</li>
+                    <li>Github</li>
+                    <li>Python</li>
+                </ul>
+                </section>
+                <section>
+                <h2>Laptop Time</h2>
+                <p><b>user:</b> wolf</p>  
+                <p><b>password:</b>Wolfgang Forensics</p>  
+                </section>
+                <section>
+                <h1>Why Python?</h1>
+                <img src="python_brochure.jpg">
+                <p>You can also read the <a href="http://brochure.getpython.info/media/releases/prerelases/psf-python-brochure-vol-1-final-content-preview">brochure</a>.</p>
+                </section>
+                <section>
+                <p>Python makes programming <b>easy</b>, and <b>fun to learn</b>.</p>
+                <p>Pseudocode on Quicksort from <a href="http://en.wikipedia.org/wiki/Quicksort">Wikipedia</a>:</p>
+                <pre><code data-trim style="font-size: 18px; margin-top: 20px;">
+  function quicksort('array')
+      if length('array') ≤ 1
+          return 'array'  // an array of zero or one elements is already sorted
+      select and remove a pivot element 'pivot' from 'array'
+      create empty lists 'less' and 'greater'
+      for each 'x' in 'array'
+          if 'x' ≤ 'pivot' then append 'x' to 'less'
+          else append 'x' to 'greater'
+      return concatenate(quicksort('less'), list('pivot'), quicksort('greater')) // two recursive calls
+                </code></pre>
+                <p>In Python:</p>
+                <pre><code data-trim style="font-size: 18px; margin-top: 20px;">
+def quicksort(array):
+    if len(array) <= 1:
+        return array
+    pivot = array[len(array)/2]; del array[len(array)/2]
+    less = []; greater = []
+    for x in array:
+        if x <= pivot: less.append(x)
+        else: greater.append(x)
+    return quicksort(less) + [pivot] + quicksort(greater)
+</code></pre>
+                </section>
+                <section>
+                <h1>Why Git?</h1>
+                <img src="git.png">
+                </section>
+                <section>
+                <p>Git is a <a href="https://en.wikipedia.org/wiki/Revision_control">version control system</a>.</p>
+                <p>Record each change + reason with a <b>commit</b></p>
+                <p>Use it for yourself, and as a log for others</p>
+                <p>There are <a href="http://try.github.io">free courses</a> teaching git online</p>
+            <video controls='controls' height='454' preload='none' width='807'>
+            <source src='http://www.viddler.com/file/d/528e63d8.mp4?vfid=72840c5c4524d6dcaeea87c1f75356a6' type='video/mp4'></source>
+            <track kind='subtitles' src='/assets/level1-en.srt' srclang='en'></track>
+            <object data='http://www.viddler.com/file/d/528e63d8.mp4?vfid=72840c5c4524d6dcaeea87c1f75356a6' height='454' type='application/x-shockwave-flash' width='807'>
+            <param name='movie' value='http://www.viddler.com/file/d/528e63d8.mp4?vfid=72840c5c4524d6dcaeea87c1f75356a6'>
+            <param name='flashvars' value='f=1&amp;autoplay=f&amp;disablebranding=0&amp;loop=0&amp;enablecallbacks=t&amp;useJavaScript=t&amp;hd=1'>
+            </object>
+            <p>Your browser does not support HTML5 video. Please download the video using the link on the left.</p>
+            </video>
+                </section>
+                <section>
+                <p>Like git, there are many courses on Python free
+                   online.</p>
+                <p>We will try
+                   <a href="http://pythonmonk.com/">Python Monk</a>, but I
+                   suggest you check out Udacity <a href="https://www.udacity.com/course/cs101">CS 101</a> as well.
+                </section>
+                <section>
+                <p style="text-align:justify;"><b>Bored?</b> Well, you're also learning skills for a future
+                job.  Self-trained, motivated IT staff sometimes get jobs even
+                without college degrees.</p>
+                <br />
+                <p style="text-align:justify; color:red;"><b>Don't forget!</b>
+                If you aren't bored, you could make a talk or poster about this
+                class!</p>
+                </section>
+			</div>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
