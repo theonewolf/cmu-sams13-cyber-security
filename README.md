@@ -23,8 +23,8 @@ This is in flux and not finalized (it may even change during the course).
     <tr><td>Day 6</td><td>Watching for Intrusions: Logs, Hash Matching, Tripwire, </td></tr>
     <tr><td>Day 7</td><td>Eliminating Intrusions: Firewalls, Public Key Cryptography, </td></tr>
     <tr><td>Day 8</td><td>Dealing with Intrusions: Freeze System, Scan Disk, Point of Entry</td></tr>
-    <tr><td>Day 9</td><td>Low-Level FAT32 Exploration with Hexdump</td></tr>
-    <tr><td>Day 10</td><td>Recovering Hidden FAT32 Files, Detecting Digital Image Alterations</td></tr>
+    <tr><td>Day 9</td><td>Bayesian Classification and Machine Learning (Weak AI)</td></tr>
+    <tr><td>Day 10</td><td>Detecting Spam with a Bayesian Classifier</td></tr>
     <tr><td>Day 11</td><td>Perfect Cryptography is Easy, and so is Steganography</td></tr>
     <tr><td>Day 12</td><td>Diffie-Hellman Key Exchange</td></tr>
     <tr><td>Day 13</td><td>Red Team vs Blue Team</td></tr>
