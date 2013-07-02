@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 2: Passwords, Hashing, Rainbow Tables, and Cracking</title>
+
+		<meta name="description" content="Lesson 2 for SAMS 2013 CMU Class">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Passwords, Hashing, Rainbow Tables, and Cracking</h3>
+					<p>
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+                    <p><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+				</section>
+                <section>
+                <h2>Review Yesterday</h2>
+                <p>Got through Git tutorial, let's try a
+                   <a href="http://pythonmonk.com/">Python tutorial</a>.
+                </section>
+                <section>
+                <h2>Hashes</h2>
+                <p style="text-align:justify;"><span style="font-size:200%;">1</span>Take an <b>arbitrary amount of bytes</b> and map them into a
+                <b>fixed size amount of bytes.</b></p>
+                <p style="text-align:justify;"><span style="font-size:200%;">2</span>Use a <b>one-way function</b>: simple to compute, difficult to reverse.</p>
+                <p style="text-align:justify;"><span style="font-size:200%;">3</span>Ideally it is also <b>injective</b>: mapping each valid input to a <b>distinct</b> hash value.</p>
+                <img src="hash_table.svg">
+                </section>
+                <section>
+                <h1>You use hashes each day.</h1>
+                </section>
+                <section>
+                <h2>Practical Hashing</h2>
+                <p>Achieves the <b>first two</b> properties, but generally only the <b>first</b>.</p>
+                </section>
+                <section>
+                <h1>Add Hash</h1>
+                <p style="color:red;" class="fragment">Sum all input bytes, take least significant byte
+                as hash value.</p>
+                <p class="fragment">For any number of input bytes, produces <b>single byte
+                hash</b></p>
+                <pre class="fragment"><code data-trim style="font-size: 18px; margin-top:20px;">#!/usr/bin/env python
+
+def add_hash(array):
+    return sum(array) & 0x0ff
+
+if __name__ == '__main__':
+    print add_hash([23,42,56,67,89,100])
+</code></pre>
+                <div class="fragment">
+                <p><b>Expected output:</b></p>
+                <pre>121</pre></div>
+                </section>
+                <section>
+                <h2>How to Store Passwords?</h2>
+                </section>
+                <section>
+                <h2>Attempt 1: Plaintext</h2>
+                <table>
+                <tr><td>user0</td><td>password</td></tr>
+                <tr><td>user1</td><td>123456</td></tr>
+                <tr><td>user2</td><td>12345678</td></tr>
+                <tr><td>user3</td><td>abc123</td></tr>
+                <tr><td>user4</td><td>qwerty</td></tr>
+                <tr><td>user5</td><td>monkey</td></tr>
+                <tr><td>user6</td><td>letmein</td></tr>
+                <tr><td>user7</td><td>dragon</td></tr>
+                <tr><td>user8</td><td>111111</td></tr>
+                <tr><td>user9</td><td>baseball</td></tr>
+                </table>
+                <p style="color:red; text-align:justify;"
+                class="fragment"><b>Problem:</b> If a malicious user reads
+                this, they can get passwords for potentially other
+                services!</p>
+                </section>
+                <section>
+                <h2>Attempt 2: Store Hashes (MD5)!</h2>
+                <table>
+                <tr><td>user0</td><td>5f4dcc3b5aa765d61d8327deb882cf99</td></tr>
+                <tr><td>user1</td><td>e10adc3949ba59abbe56e057f20f883e</td></tr>
+                <tr><td>user2</td><td>25d55ad283aa400af464c76d713c07ad</td></tr>
+                <tr><td>user3</td><td>e99a18c428cb38d5f260853678922e03</td></tr>
+                <tr><td>user4</td><td>d8578edf8458ce06fbc5bb76a58c5ca4</td></tr>
+                <tr><td>user5</td><td>d0763edaa9d9bd2a9516280e9044d885</td></tr>
+                <tr><td>user6</td><td>0d107d09f5bbe40cade3de5c71e9e9b7</td></tr>
+                <tr><td>user7</td><td>8621ffdbc5698829397d97767ac13db3</td></tr>
+                <tr><td>user8</td><td>96e79218965eb72c92a549dd5a330112</td></tr>
+                <tr><td>user9</td><td>276f8db0b86edaa7fc805516c852c889</td></tr>
+                </table>
+                <p style="color:red; text-align:justify;"
+                class="fragment"><b>Problem:</b> Hash databases&mdash;rainbow
+                tables. Even available via convenient <a href="http://www.md5crack.com/">
+                websites</a>!</p>
+                </section>
+                <section>
+                <h2>Rainbow Tables</h2>
+                <p><b>Compact</b> storage of password and hash chains.
+                Suggest you read <a href="http://en.wikipedia.org/wiki/Rainbow_table">Wikipedia</a> for more details.</p>
+                <img src="hash_chain.png">
+                </section>
+                <section>
+                <h2>Attempt 3: Salt Your Hashes</h2>
+                <p>Don't just hash the plaintext password, add some random
+                   bytes to it!</p>
+                <table>
+                <tr><td>user0</td><td>password+mysalt</td></tr>
+                <tr><td>user1</td><td>123456+mysalt</td></tr>
+                <tr><td>user2</td><td>12345678+mysalt</td></tr>
+                <tr><td>user3</td><td>abc123+mysalt</td></tr>
+                <tr><td>user4</td><td>qwerty+mysalt</td></tr>
+                <tr><td>user5</td><td>monkey+mysalt</td></tr>
+                <tr><td>user6</td><td>letmein+mysalt</td></tr>
+                <tr><td>user7</td><td>dragon+mysalt</td></tr>
+                <tr><td>user8</td><td>111111+mysalt</td></tr>
+                <tr><td>user9</td><td>baseball+mysalt</td></tr>
+                </table>
+                </section>
+                <section>
+                <h2>Salted Hashes: Best Practice</h2>
+                <table>
+                <tr><td>user0</td><td>49ed4bcd9635b017b4477b7977057f30</td></tr>
+                <tr><td>user1</td><td>3ca69280a23856997973a2043743afed</td></tr>
+                <tr><td>user2</td><td>5455694efd79a97cb52913f35e199d5f</td></tr>
+                <tr><td>user3</td><td>a86e8d464959fedfa12e115e5cb37c22</td></tr>
+                <tr><td>user4</td><td>f2306dc720755029c00b4e11e31c9ea1</td></tr>
+                <tr><td>user5</td><td>f75d1324846f80316f258e2d20dada41</td></tr>
+                <tr><td>user6</td><td>b5f367c30f37e890a9207b26d1c9407f</td></tr>
+                <tr><td>user7</td><td>4bfffda4643be17d5ce4096128d1fb08</td></tr>
+                <tr><td>user8</td><td>62d49c14bd9ac1fbd37b0e57910dc8fd</td></tr>
+                <tr><td>user9</td><td>31eb9f277c047738994bcb29f1153a97</td></tr>
+                </table>
+                </section>
+                <section>
+                <h1>Use <a href="http://www.ietf.org/rfc/rfc2898.txt">PBKDF2</a>!</h2>
+                <div class="fragment">
+                <h2 style="color:red; text-align:justify;">Better: Don't <b>fucking</b> store passwords in <b>any fucking form</b>.</h2>
+                <img src="samuel.jpg">
+                </div>
+                <p class="fragment"><b>Random Aside:</b> <a href="http://programming-motherfucker.com/">Programming, Motherfucker.</a></p>
+                </section>
+                <section>
+                <h2>What do you do?</h2>
+                <p>Let some <b>other motherfucker</b> store it!</p>
+                <ul>
+                    <li><a href="http://oauth.net/">OAuth</a></li>
+                    <li><a href="https://developers.facebook.com/docs/facebook-login/">Facebook Login</a></li>
+                    <li><a href="https://developers.google.com/+/">Google+ Sign-In</a></li>
+                    <li><a href="https://developers.google.com/games/services/">Google Play Game API</a></li>
+                </ul>
+                <p class="fragment"><b>Random Aside:</b> Same for payment processing, see <a href="https://stripe.com/">Stripe</a>.
+                </section>
+                <section>
+                <h1 style="color:red;">Lesson: Store minimal user data.</h1>
+                </section>
+                <section>
+                <h2>Pro Windows XP Password Storage?</h2>
+                <p>Well, let's consult <a href="http://en.wikipedia.org/wiki/LM_hash#Algorithm">Wikipedia</a>.</p>
+                <p style="color:red;"><b>Random Aside:</b> Wikipedia is very
+                useful</p>
+                </section>
+                <section>
+                <h1>Cracking Time</h1>
+                <h2 style="color:red;">Tool: <a href="http://ophcrack.sourceforge.net/">Ophtcrack</a></h2>
+                <p><small>PS Ophtcrack has a live bootable CD version...</small></p>
+                </section>
+			</div>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
