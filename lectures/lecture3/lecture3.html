@@ -58,6 +58,14 @@
                 their actions</b> and <b>capturing their tools</b>.</p>
                 <img src="honeypot.jpg">
                 </section>
+                <section>
+                <h2>Example Attack (gs9671)</h2>
+                <pre><code>Jun 30 23:21:24 gs9671 sshd[19668]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=burl-mse-71-255-157-150.static.ngn.east.myfairpoint.net  user=root
+Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): getting password (0x00000388)
+Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): pam_get_item returned a password
+Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): request wbcLogonUser failed: WBC_ERR_AUTH_ERROR, PAM error: PAM_USER_UNKNOWN (10), NTSTATUS: NT_STATUS_NO_SUCH_USER, Error message was: No such user
+</code></pre>
+                </section>
 			</div>
 		</div>
 
