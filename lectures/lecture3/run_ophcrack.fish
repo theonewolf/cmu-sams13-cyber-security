@@ -1,6 +1,6 @@
 #!/usr/bin/fish
 #
-# Make sure that the Windows NTFS partition has been mounted somewher. If it
+# Make sure that the Windows NTFS partition has been mounted somewhere. If it
 # comes from a virtual disk, you may want to mount it thusly:
 #
 #       sudo kpartx -av VIRTUAL_DISK_FILE
