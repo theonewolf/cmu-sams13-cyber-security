@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 4: Finishing Cracking, Moving Onto Backdoors</title>
+
+		<meta name="description" content="Lesson 4 for SAMS 2013 CMU Class">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Finishing Cracking, Moving Onto Backdoors</h3>
+					<p>
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+                    <p><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+				</section>
+                <section>
+                <h2>Google, Sign out of all other sessions!</h2>
+                </section>
+                <section>
+                <h2>Goals</h2>
+                <p style="text-align:left;"><span style="font-size:200%;">1</span>Create GitHub Repository for Cracking Script</p>
+                <p style="text-align:left;"><span style="font-size:200%;">2</span>Load Windows XP VM and Create New User/Password</p>
+                <p style="text-align:left;"><span style="font-size:200%;">3</span>Shutdown Windows XP VM and Crack New User/Password</p>
+                <p style="text-align:left;"><span style="font-size:200%;">4</span>Infect VM with Trojan backdoor</p>
+                </section>
+                <section>
+                <h2>Keyloggers</h2>
+                <p style="text-align:justify;">Designed to capture every input keystroke to every
+                application; runs on target machine</p>
+                <p style="color:red; text-align:justify;">Target can detect, but circumvents
+                cryptography (HTTPS) and firewalls</p>
+                </section>
+                <section>
+                <h2>Types</h2>
+                <p style="text-align:justify;"><a href="http://en.wikipedia.org/wiki/Keystroke_logging">Wikipedia</a> offers a good,
+                up-to-date list.</p>
+                <p style="text-align:justify; color:red;"><a href="http://en.wikipedia.org/wiki/Blue_Pill_(software)">Blue Pill</a> indicates a troubling future.</p>
+                </section>
+                <section>
+                <img src="Keylogger-software-logfile-example.jpg">
+                </section>
+                <section>
+                <img src="keylogger_09_08.jpg">
+                </section>
+                <section>
+                <iframe width="960" height="720" src="//www.youtube.com/embed/RGS4q-WHTlg?rel=0" frameborder="0" allowfullscreen></iframe>
+                </section>
+                <section>
+                <img src="google-glass-explorer.jpg">
+                </section>
+                <section>
+                <h2>Worms</h2>
+                <p style="text-align:justify;">A <b>self-propagating</b> virus,
+                normally designed to spread via the network using
+                <b>exploits</b> against buggy software.</p>
+                <p style="text-align:justify; color:red;">Create botnets rapidly; infect you, emails all your friends etc.</p>
+                </section>
+                <section>
+                <h2>Unpatched Windows</h2>
+                <a href="https://isc.sans.edu/survivaltime.html"><img src="../lecture3/survivalgraph.png"></a>
+                </section>
+                <section>
+                <h2>Design of the Internet</h2>
+                <embed src="p106-clark.pdf" width="800" height="575" type="application/pdf">
+                </section>
+                <section>
+                <h2>Missing from the Design...</h2>
+                <p>Security?</p>
+                <p>Identity?</p>
+                <p>Provenance?</p>
+                <p>Accountability...?</p>
+                <p class="fragment" style="color:red;"><a href="http://www.nets-fia.net/">NSF Future Internet Architecture Project</a></p>
+                </section>
+                <section>
+                <h2>Trojan + Rootkit + Backdoor</h2>
+                <p style="text-align:justify">You can deploy a hidden virus&mdash;<b>Trojan Horse</b>&mdash;which
+                hides itself from the user by becoming root&mdash;via a <b>Rootkit</b>&mdash;and
+                lets attackers into the system bypassing login&mdash;opening a <b>Backdoor</b>.</p>
+                <p style="text-align:justify; color:red;">Used in major botnets, targeted hacking attacks,
+                most major hacking incidents, <b>government cyber warfare</b>.</p>
+                </section>
+                <section>
+                <p style="text-align:justify;"><b><a href="http://en.wikipedia.org/wiki/Stuxnet">Stuxnet</a></b> was a worm with a rootkit
+                designed to damage centrifuges built by Seimens.</p>
+                <p style="text-align:justify; color:red;">Most experts believe Stuxnet was developed and deployed
+                by covert <b>US and Isreali</b> military organizations against <b>Iran</b>.</p>
+                <img width="500px" src="2010-05-14-USCYBERCOM_Logo.jpg">
+                </section>
+                <section>
+                <h2>Infect Your VM</h2>
+                <p style="text-align:justify;"><b>First, copy your virtual disk and VM!</b></p>
+                <p style="text-align:justify;">We will use <a href="http://en.wikipedia.org/wiki/Sub7">Sub7</a>, an older trojan</p>
+                <p style="text-align:justify;">Download inside VM: <a href="http://gs9671.sp.cs.cmu.edu/lectures/lecture4/sub7.zip">http://goo.gl/jbHuH</a></p>
+                <p style="text-align:justify;"><a href="http://unremote.org/">DarkComet</a> tool, recently <a href="http://www.theregister.co.uk/2012/07/10/darkcomet_rat_killed_off/">famous</a>.</p>
+                </section>
+                <section>
+                <h2>End-Game Idea</h2>
+                <p style="text-align:justify;">A <b>honeypot</b> is a system placed online with explicit
+                security vulnerabilities.  It is designed to
+                <b>attract hackers</b> with two goals: <b>monitoring
+                their actions</b> and <b>capturing their tools</b>.</p>
+                <img src="../lecture3/honeypot.jpg">
+                </section>
+                <section>
+                <h2>Example Attack (gs9671)</h2>
+                <pre><code>Jun 30 23:21:24 gs9671 sshd[19668]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=burl-mse-71-255-157-150.static.ngn.east.myfairpoint.net  user=root
+Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): getting password (0x00000388)
+Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): pam_get_item returned a password
+Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): request wbcLogonUser failed: WBC_ERR_AUTH_ERROR, PAM error: PAM_USER_UNKNOWN (10), NTSTATUS: NT_STATUS_NO_SUCH_USER, Error message was: No such user
+</code></pre>
+                </section>
+			</div>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>

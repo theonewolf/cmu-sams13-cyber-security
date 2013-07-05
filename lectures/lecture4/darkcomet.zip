@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+				<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta http-equiv="content-language" content="en" />
+		<meta name="keywords" content="file transfer, large file, big file, free send, send file">
+		<meta name="description" content="DarkComet RAT Legacy.zip | Free file hosting. Email large files for free.">
+					<meta property="og:image" content="http://www.sendspace.com/img/fb_icon100.png" />
+			<meta property="og:type" content="website" />
+				<title>Download DarkComet RAT Legacy.zip from Sendspace.com - send big files the easy way</title>
+		<meta http-equiv="X-UA-Compatible" content="chrome=1" />
+		<link type="text/css" rel="stylesheet" href="/css/sendspace.css?v=66f7b3bc"/>
+		<link rel="shortcut icon" href="/favicon.ico" />
+				<script type="text/javascript" src="/js/jquery-1.7.1.min.js?v=66f7b3bc"></script>
+		<link type="text/css" rel="stylesheet" href="/openid/css/openid.css?v=66f7b3bc" />
+	</head>
+
+	<body id="_page">
+
+	<!--[if lt IE 8]>  
+		<div style='border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 75px; position: relative;'>
+		    <div style='position: absolute; right: 3px; top: 3px; font-family: courier new; font-weight: bold;'>
+		    	<a href='#' onclick='javascript:this.parentNode.parentNode.style.display="none"; return false;'>
+		    		<img src='/graphics/ie6nomore/ie6nomore-cornerx.jpg' style='border: none;' alt='Close this notice'/>
+		    	</a>
+		    </div>
+		    <div style='width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: black;'>
+		          <div style='width: 75px; float: left;'><img src='/graphics/ie6nomore/ie6nomore-warning.jpg' alt='Warning!'/></div>
+		          <div style='width: 275px; float: left; font-family: Arial, sans-serif;'>
+		  	        <div style='font-size: 14px; font-weight: bold; margin-top: 12px;'>You are using an outdated browser</div>
+		  	        <div style='font-size: 12px; margin-top: 6px; line-height: 12px;'>For a better experience using this site, please upgrade to any of the following:</div>
+		  	      </div>
+		  	      <div style='width: 75px; float: left;'>
+		  	      	<a href='http://www.firefox.com' target='_blank'>
+		  	      		<img src='/graphics/ie6nomore/ie6nomore-firefox.jpg' style='border: none;' alt='Get Firefox 5'/>
+		  	      	</a>
+		  	      </div> 
+		  	      <div style='width: 75px; float: left;'>
+		  	      	<a href='http://www.browserforthebetter.com/download.html' target='_blank'>
+		  	      		<img src='/graphics/ie6nomore/ie6nomore-ie.jpg' style='border: none;' alt='Get Internet Explorer 9'/>
+		  	      	</a>
+		  	      </div>
+		  	      <div style='width: 73px; float: left;'>
+		  	      	<a href='http://www.apple.com/safari/download/' target='_blank'>
+		  	      		<img src='/graphics/ie6nomore/ie6nomore-safari.jpg' style='border: none;' alt='Get Safari 5'/>
+		  	      	</a>
+		  	      </div>
+		  	      <div style='float: left;'>
+		  	      	<a href='http://www.google.com/chrome' target='_blank'>
+		  	      		<img src='/graphics/ie6nomore/ie6nomore-chrome.jpg' style='border: none;' alt='Get Google Chrome'/>
+		  	      	</a>
+				  </div>
+			</div>
+		</div>
+	<![endif]-->
+	
+	
+	<div id="header">
+		<div class="grasp">
+			
+			<div class="wrap">
+				<div id="logo">
+					<a href="/">	
+						<img width="222px" height="42px" src="/graphics/header/logo.png" alt="sendspace" />
+						<span id="userType"></span>
+						<span id="slogan" style="clear:left;">Send, Receive, Track &amp; Share Your Big Files!</span>
+					</a>
+			</div>			
+									<ul id="control">
+																					<li style="position: relative; z-index:3">
+								<a href="/login.html" class="login" rel="open">Log In</a>
+								<div id="login_frame" class="overlay">
+									<a href="#" class="login" rel="close">Log In</a>
+									<a class="remove login" rel="close"></a>
+									<div class="clear" style="height: 10px"></div>
+									<form method="post" action="/login.html">
+										<input type="hidden" name="action" value="login" />
+										<input type="hidden" name="submit" value="login" />
+										<input type="hidden" name="target" value="%2Ffile%2Fivuojs" />
+										<input type="hidden" name="action_type" value="login" />
+										<input type="hidden" name="remember" value="1" />
+																				<div class="row first">
+											<span class="label">Your Username</span>
+											<input type="text" name="username" class="input" id="top_login_username" />
+										</div>
+										<div class="row">
+											<span class="label">Your Password</span>
+											<input type="password" name="password" class="input" />
+										</div>
+										<div class="row" style="margin:3px 0">
+											<label style="float: left;line-height:36px;margin-left: 5px"><input type="checkbox" class="checkbox" name="remember" checked/> Remember me</label>
+											<input style="float: right;margin: 0 0 0 2px" type="submit" class="submit button" value="Log In"/>
+										</div>
+									</form>
+									
+									<form action="http://www.sendspace.com/openid/auth.php" method="get" id="openid_form">
+										<input type="hidden" name="action" value="verify" />
+										<span style="float:left; margin-top:13px; padding-right:6px; margin-left:3px;"><strong>Or</strong></span>
+										
+										<div class="row" style="margin-top:-12px; height:50px; float:left;">
+											<div id="openid_choice">
+												<div id="openid_btns"></div>
+											</div>
+											<div id="openid_input_area">
+												<input id="openid_identifier" name="openid_identifier" type="text" value="http://" />
+												<input id="openid_submit" type="submit" value="Sign-In"/>
+											</div>
+										</div>
+										
+									</form>
+									<div class="clear split"></div>
+									<ul class="options">
+										<li><a href="/forgot.html">Forgot your password?</a></li>
+										<!--<li><a href="/register.html">Don't have an account yet? Register now!</a></li>-->
+									</ul>									
+								</div>
+							</li>
+																			 <li><a href="/register.html">Sign Up</a></li> 						<li><a href="/premium_upgrade.html?_ptc=122">Plans</a></li>
+						<li><a href="/download_tools.html">Tools</a></li>
+						<li class="last"><a href="/help.html">Contact Us</a></li>
+	
+											</ul>
+												
+				<div class="clear"></div>
+	
+							</div>
+
+		</div>
+	</div>
+
+<script type="text/javascript" src="/jsc/download.js"></script>
+<script type="text/javascript">
+var count = 60;
+
+function runad()
+{
+    try { 
+        _gaq.push(['_trackPageview', '/file/downloadbutton']);
+    } catch(e) { }
+            var date_ob=new Date();
+        document.cookie='sstmppop=yes; path=/;';
+        if (document.cookie.indexOf('sspopit=yes') <= 0 && document.cookie.indexOf('sstmppop=yes') > 0)
+        {
+            newin = window.open('http://69.31.136.5/defaults/sendspace-pop.html', 'popadwin', 'width=800,height=600,toolbar=yes,location=yes,menubar=yes,status=yes,resizable=yes,scrollbars=yes');
+            newin.blur()
+            window.focus()
+            date_ob.setTime(date_ob.getTime()+86400000);
+            document.cookie='sspopit=yes; path=/; expires='+ date_ob.toGMTString();
+        }
+    
+    return true;
+}
+
+function downloadcountdown()
+{
+    if (count == 1)
+    {
+    	$('#divCounter').hide();
+    	$('#spndllink').show();
+    }
+    else
+    {
+        cnt = document.getElementById("spnCountDown");
+        count -= 1;
+        cnt.innerHTML = count;
+        setTimeout('downloadcountdown()', 1000);
+    }
+}
+
+function freeclick()
+{
+	$('.download_timer_holder').hide();
+	$('#spndllink').show();
+	
+	return false;
+}
+</script>
+
+<div id="headline">
+	<h1 class="droid">
+		Download	</h1>
+			<div class="actions file">
+			<a href="/" class="button upload_new_file">&gt; Upload New File</a>
+		</div>
+	</div>
+
+<div class="clear"></div>
+
+
+
+<div id="content" class='download_with_ads'>	
+<div id="android_dl" style="position:absolute; left:-115px; top:100px;">
+		<a href="https://market.android.com/details?id=com.app.sendspace.mobile">
+		<img src="/graphics/android_ad_dl.png" width="115px" height="200px" style="cursor:hand" alt="" />
+	</a>
+</div>
+
+		
+<div style="margin-bottom: 20px" id="sswxdownload">
+	<div class="ads_holder holder728x90">
+		<script type='text/javascript' src='http://optimized.by.vitalads.net/serve/eccbc87e4b5ce2fe28308fd9f2a7baf3/?cb=431562838&filename=DarkComet+RAT+Legacy.zip'></script>	</div>	
+	<a class="ads_remove" href="/premium_upgrade.html"> Remove Ads</a>
+</div>
+<div class="clear clear1"></div>
+
+<div class="info">
+	<h2 class="bgray"><b>DarkComet RAT Legacy.zip</b></h2>
+	<div class="clear clear1"></div>
+
+	<div style="padding-top: 10px;min-height: 620px">
+		<div style="float:left;overflow:hidden;width:160px">
+			<div class="ads_holder holder160x600">
+            	<script type='text/javascript' src='http://optimized.by.vitalads.net/serve/6f4922f45568161a8cdf4ad2299f6d23/?cb=242749000&filename=DarkComet+RAT+Legacy.zip'></script>			</div>
+			<a class="ads_remove" href="/premium_upgrade.html"> Remove Ads</a>
+		</div>
+		
+		<div style="float:right;margin: 0;width:300px;height:619px;position:relative">
+			<div class="ads_holder holder300x250">
+            	<script type='text/javascript' src='http://optimized.by.vitalads.net/serve/c4ca4238a0b923820dcc509a6f75849b/?cb=865686248&filename=DarkComet+RAT+Legacy.zip'></script>			</div>
+			<a class="ads_remove" href="/premium_upgrade.html"> Remove Ads</a>
+			<br clear="all">
+			<div class="ads_holder holder300x250">
+            	<script type='text/javascript' src='http://optimized.by.vitalads.net/serve/c4ca4238a0b923820dcc509a6f75849b/?cb=1400636594&filename=DarkComet+RAT+Legacy.zip'></script>			</div>
+			<a class="ads_remove" href="/premium_upgrade.html"> Remove Ads</a>
+		</div>
+		
+		<div style="float: left;padding: 0;margin: 0 10px;width: 350px">
+		
+					
+			<div class="file_description reverse margin_center" style="border: 0;margin-top:0;padding-top:0">
+				<b>File Size:</b> 9.66MB			</div>
+	
+	    		        
+	        	        
+    							<div class="msg error" onclick="$(this).fadeOut('slow')">A download was completed. Please check your download location or retry.</div>						
+			<div class="text">
+									Upgrade for <b class="green">Fast & Ad-free</b> file transfers - <a class="bold" href="/premium_upgrade.html?_ptc=121">See Plans and pricing</a>
+							</div>	        
+			
+											<br><br>
+				<div class="text" style="width: 360px;margin:10px auto;">
+					<div id="spndllink" style="">
+						<div style="width:355px;font-size: 14px"  class="downloadpage_download">
+							<img src="/img/download.png" style="padding-bottom: 4px; vertical-align: middle;margin-left: -5px">
+							<a id="download_button" href="http://fs07n5.sendspace.com/dl/0e03014e8ae0a30555abe73cd327978e/51d6f3c1619193ad/ivuojs/DarkComet%20RAT%20Legacy.zip" onclick="runad()" title="download DarkComet RAT Legacy.zip">Click here to start download from sendspace</a>						</div>
+																		<br>
+											</div>
+				</div>				
+					</div>
+	</div>
+	<div class="clear"></div>
+			<div style="text-align:center;font-size: 12px">
+			<br><br>
+			<strong>Note:</strong> your download is limited to a max of 80KB/s. <a href="http://www.sendspace.com/pro/dl/22z2kc" title="test premium download speed">Click here</a> to test a premium download and see how it would be when you use a Pro account - <b>very important:</b> give the download at least a minute to reach top speed.
+		</div>
+		
+</div>
+<div class="clear"></div>
+
+<script type="text/javascript">
+	   
+            if (top.location != location)
+            top.location.href = document.location.href;
+    </script>
+
+
+<noscript>
+	 <div id="nojs" style='border: 1px solid #F7941D; background: #FEEFDA; text-align: center; clear: both; height: 75px; position: relative;'>
+	    <div style='width: 640px; margin: 0 auto; text-align: left; padding: 0; overflow: hidden; color: black;'>
+	        <div style='width: 100%; float: left; font-family: Arial, sans-serif;'>
+	                <div style='width: 75px; float: left;'><img src='/graphics/ie6nomore/ie6nomore-warning.jpg' alt='Warning!'/></div>
+	                <div style='font-size: 14px; font-weight: bold; margin-top: 12px;'>No javascript available!</div>
+	                <div style='font-size: 12px; margin-top: 6px; line-height: 12px;'>Your browser does not support JavaScript or JavaScript is disabled. You must enable JavaScript or use a JavaScript supported browser for this site to function correctly.</div> 
+	        </div>
+	    </div>
+	</div>
+</noscript>
+
+
+</div> <!-- #content -->
+
+
+
+<div id="footer">
+	<div class="wrap">
+					<ul id="footer_menu">
+				<li>
+					<ul>
+						<li class="title">SendSpace</li>
+													<li><a href="/">Upload</a></li>
+																		<li><a href="/about.html">About Us</a></li>
+						<li><a href="http://blog.sendspace.com">Blog</a></li>
+						<li><a href="/terms.html">Terms Of Use</a></li>
+						<li><a href="/privacy_policy.html">Privacy Policy</a></li>
+					</ul>
+				</li>
+				<li>
+					<ul>
+						<li class="title">Tools</li>
+						<li><a href="/download_wizard.html">Wizard (Win*, Mac, Linux)</a></li>
+						<li><a href="/download_android.html">SendSpace for Android</a></li>
+						<li><a href="/download_ishare.html">iShare for iPhone</a></li>
+						<li><a href="/developers/">Developer Tools</a></li>
+					</ul>
+				</li>
+
+				<li style="width:90px">
+					<ul>
+						<li class="title">Help &amp; Support</li>
+						<li><a href="/help.html">Contact Us</a></li>
+													<li><a href="/faqs.html">FAQ</a></li>
+											</ul>
+				</li>
+												<li style="float:right; width:100px; padding:0">
+				 					 	<a href="https://market.android.com/details?id=com.app.sendspace.mobile" title="SendSpace Android Application">
+				 		<img width="100" height="100" src="/img/androidqr.gif" alt="SendSpace Android Application QR" />
+				 	</a>
+				</li>
+			</ul>
+
+				<div id="signature">
+						<div class="clear"></div>
+			&copy; 2005-2013 sendspace.com
+		</div>
+	</div>
+</div>
+<div id="glass"></div>
+
+
+<script type='text/javascript' src='/js/sendspace.js?v=66f7b3bc'></script>
+<script type='text/javascript' src='/openid/js/openid-jquery.js?v=66f7b3bc?v=66f7b3bc'></script>
+<script type='text/javascript' src='/openid/js/openid-en.js?v=66f7b3bc?v=66f7b3bc'></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    				openid.img_path = '/openid/images/';
+    				openid.init('openid_identifier');
+    			 });
+</script>
+
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-2221170-1']);
+        _gaq.push(['_setDomainName', '.sendspace.com']);
+                    _gaq.push(['_trackPageview', '/download/sky/5']);
+        
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+</body>
+</html>
+
