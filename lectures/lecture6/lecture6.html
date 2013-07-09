@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 6: Defense Against the Dark Arts</title>
+
+		<meta name="description" content="Lesson 6 for SAMS 2013 CMU Class">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Defense Against the Dark Arts</h3>
+					<p>
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+                    <p><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+				</section>
+                <section>
+                <h2>1/3 Review</h2>
+                <p>git</p>
+                <p>Python</p>
+                <p>Trojans, Worms, Viruses</p>
+                <p>Virtual Machines</p>
+                <p>ARP poisoning</p>
+                <p>Networking tools and terms</p>
+                <p>Hashes</p>
+                <p>Password cracking</p>
+                </section>
+                <section>
+                <h2>Upcoming</h2>
+                <p>Virus scanning</p>
+                <p>Firewalls</p>
+                <p>Log monitoring</p>
+                <p>Spam filtering (machine learning)</p>
+                <p>Cryptography and Cryptanalysis</p>
+                <p>Intrusion Detection Systems</p>
+                </section>
+                <section>
+                <h2>Goals</h2>
+                <p style="text-align:left;"><span style="font-size:200%;">1</span>Ettercap attack</p>
+                <p style="text-align:left;"><span style="font-size:200%;">2</span>Learn firewalls, anti-virus, log monitoring, and file monitoring</p>
+                <p style="text-align:left;"><span style="font-size:200%;">3</span>Create a virus scanner</p>
+                </section>
+                <section>
+                <h2>Threat Vectors (I)</h2>
+                <p style="text-align:left;" class="fragment"><span style="font-size:200%;">1</span>Social engineering</p>
+                <p style="color:red; text-align:left; padding-left: 50px;" class="fragment">Be smart, don't give out personal information.</p>
+                <p style="text-align:left;" class="fragment"><span style="font-size:200%;">2</span>Physical access</p>
+                <p style="color:red; text-align:left; padding-left: 50px;" class="fragment">Encrypt important information (<a href="http://www.truecrypt.org/">TrueCrypt</a>).</p>
+                <p style="text-align:left;" class="fragment"><span style="font-size:200%;">3</span>Trojan horse</p>
+                <p style="color:red; text-align:left; padding-left: 50px;" class="fragment">Get a good virus scanner (<a href="http://www.clamav.net/lang/en/">ClamAV</a>).</p>
+                </section>
+                <section>
+                <h2>Threat Vectors (II)</h2>
+                <p style="text-align:left;" class="fragment"><span style="font-size:200%;">4</span>Network eavesdropping (passive)</p>
+                <p style="color:red; text-align:left; padding-left: 50px;" class="fragment">Use HTTPS/VPN always, encrypted WiFi (WPA2 or better).</p>
+                <p style="text-align:left;" class="fragment"><span style="font-size:200%;">5</span>Network attack (active)</p>
+                <p style="color:red; text-align:left; padding-left: 50px;" class="fragment">SSL can not be man-in-the-middled if you do not click through warnings!</p>
+                <p style="text-align:left;" class="fragment"><span style="font-size:200%;">6</span>Exploit server, rootkit (active)</p>
+                <p style="color:red; text-align:left; padding-left: 50px;" class="fragment">Scan files on-disk to ensure good versions (<a href="http://www.tripwire.com/">Tripwire</a>); keep servers up-to-date with latest patches.</p>
+                </section>
+                <section>
+                <h2>Reflections on Trusting Trust</h2>
+                <p style="text-align:justify;">He talks about <a href="http://en.wikipedia.org/wiki/Quine_(computing)">quine</a> technology to produce binaries which untraceably insert bugs into compiled code.</p>
+                <br /><br />
+                <div class="fragment">
+                <blockquote style="color:red;">If you wish to make an apple pie from scratch, <strong>you must first invent the universe</strong>.</blockquote>
+                <p style="text-align:right; color:red;">- Carl Sagan</p>
+                </div>
+                </section>
+			</div>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
