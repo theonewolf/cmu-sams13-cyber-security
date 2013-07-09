@@ -34,6 +34,9 @@ def scan_target(signatures, target):
         hex_sig = signature[1]
         size = len(hex_sig) / 2
         
+        if position + size > len(target):
+            return False
+
         query = target[position : position + size]
         hex_query = bytes_to_string(query)
 
