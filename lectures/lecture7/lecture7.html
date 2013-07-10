@@ -68,33 +68,35 @@
                 <section>
                 <h2>General ML Steps</h2>
                 <p style="text-align:left;"><span style="font-size:200%;">1</span>Extract features</p>
-                <p style="text-align:left;"><span style="font-size:200%;">2</span>Train a model</p>
-                <p style="text-align:left;"><span style="font-size:200%;">3</span>Test using test set</p>
+                <p style="text-align:left;"><span style="font-size:200%;">2</span>Train a model using <span style="color:red;">the training set</span></p>
+                <p style="text-align:left;"><span style="font-size:200%;">3</span>Test using <span style="color:red;">the test set</span></p>
                 <p style="text-align:left;"><span style="font-size:200%;">4</span>Use in real world</p>
-                <p style="text-align:left;"><span style="font-size:200%;">5</span>[Optional] Refine model over time</p>
+                <p style="text-align:left; color:gray;"><span style="font-size:200%;">5</span>[Optional] Refine model over time</p>
                 </section>
                 <section>
                 <h2>Today?</h2>
-                <p style="text-align:left;">Focus on: feature extraction</p>
+                <p style="text-align:left; color:red;">Focus on: feature extraction</p>
                 <p style="text-align:left;">Build a Python-based tokenizer</p>
                 <p style="text-align:left;"><strong>Token:</strong> the unit we operate on (a single 'word' separated by whitespace)</p>
                 </section>
                 <section>
                 <h2>Probability Notation</h2>
-                <p style="text-align:left;">$P(x)$: The probability of random event $x$, range $[0,1]$</p>
-                <p style="text-align:left;">$P(x \mid y)$: The probability of random event $x$ given random event $y$</p>
-                <p style="text-align:left;">$P(x,y)$: The probability of random events $x$ and $y$</p>
-                <p style="text-align:left;">$P(x,y) = P(x) * P(y)$: For independent events $x$ and $y$</p>
-                <p style="text-align:left;">$\lvert X \rvert$: The number of elements in <strong>set</strong> $X$</p>
+                <p style="text-align:left;" class="fragment">$P(x)$: The probability of random event $x$, range $[0,1]$</p>
+                <p style="text-align:left;" class="fragment">$P(x \mid y)$: The probability of random event $x$ given random event $y$</p>
+                <p style="text-align:left;" class="fragment">$P(x,y)$: The probability of random events $x$ and $y$</p>
+                <p style="text-align:left;" class="fragment">$P(x,y) = P(x) * P(y)$: For independent events $x$ and $y$</p>
+                <p style="text-align:left;" class="fragment">$\lvert X \rvert$: The number of elements in <strong>set</strong> $X$</p>
                 </section>
                 <section>
                 <h2>Bayes' Theorem</h2>
                 <br />
                 $$ P(A \mid B) = \frac{P(B \mid A) * P(A)}{P(B)}$$
                 <br />
+                <div class="fragment">
                 <h2>Conditional Independence</h2>
                 <br />
                 $$ P(A,D \mid B) = P(A \mid B) * P(D \mid B)$$
+                </div>
                 </section>
                 <section>
                 <h2>Bag of Words Model</h2>
@@ -105,16 +107,21 @@
                 <br />
                 $$P(C \mid F_1, \ldots, F_n)$$
                 <br />
-                <p style="text-align:left;">For us, we have two $c$ values in $C$: spam and not spam.</p>
+                <div class="fragment">
+                    <p style="text-align:left;">For us, we have two $c$ values in $C$: <strong>spam</strong> and <strong>not spam</strong>:</p>
+                </div>
                 <br />
+                <div class="fragment">
                 $$P(C = \text{spam} \mid F_1 = w_1, \ldots, F_n = w_n)$$
+                </div>
                 <br />
+                <div class="fragment">
                 <p style="text-align:left;">and,</p>
                 <br />
                 $$P(C = \text{not spam} \mid F_1 = w_1, \ldots, F_n = w_n)$$
                 <br />
                 <p style="text-align:left;">where each $w_i$ is a word occurring in a query document.</p>
-                <br />
+                </div>
                 </section>
                 <section>
                 <h2>Apply Bayes' Theorem (spam)</h2>
@@ -122,9 +129,13 @@
                 $$ P(A \mid B) = \frac{P(B \mid A) * P(A)}{P(B)}$$
                 <hr>
                 <br />
+                <div class="fragment">
                 $$P(C = \text{spam} \mid F_1 = w_1, \ldots, F_n = w_n) = $$
                 <br />
+                </div>
+                <div class="fragment">
                 $$\frac{P(F_1 = w_1, \ldots, F_n = w_n \mid \text{spam}) * P(\text{spam})}{P(F_1 = w_1, \ldots, F_n = w_n)}$$
+                </div>
                 </section>
                 <section>
                 <h3>Apply Independence Assumptions (na&iuml;ve)</h3>
@@ -134,37 +145,50 @@
                 $$ P(A,D \mid B) = P(A \mid B) * P(D \mid B)$$ 
                 <hr>
                 <br />
+                <div class="fragment">
                 $$\frac{P(F_1 = w_1, \ldots, F_n = w_n \mid \text{spam}) * P(\text{spam})}{P(F_1 = w_1, \ldots, F_n = w_n)} = $$
                 <br />
+                </div>
+                <div class="fragment">
                 <span style="color:red;">$$\frac{P(F_1 = w_1 \mid \text{spam}) * \cdots * P(F_n = w_n \mid \text{spam}) * P(\text{spam})}{P(F_1 = w_1)  * \cdots * P(F_n = w_n)}$$</span>
-                <br />
+                </div>
                 </section>
                 <section>
                 <h2>Cliff's Notes Version</h2>
                 <br />
                 $$P(C = \text{spam} \mid F_1 = w_1, \ldots, F_n = w_n) = $$
                 <br />
+                <div class="fragment">
                 <span style="color:red;">$$\frac{P(F_1 = w_1 \mid \text{spam}) * \cdots * P(F_n = w_n \mid \text{spam}) * P(\text{spam})}{P(F_1 = w_1)  * \cdots * P(F_n = w_n)}$$</span>
+                </div>
                 </section>
                 <section>
                 <h3>Maximum a Posteriori (MAP) Decision Rule</h3>
                 <br />
                 $$ \text{classify}(f_1,\ldots,f_n) = $$
                 <br />
+                <div class="fragment" style="color:red;">
                 $$\mathop{\text{argmax}}\limits_c P(C = c) \displaystyle\prod\limits_{i=1}^n P(F_i = f_i \mid C = c)$$
                 <br />
                 <small>You can <strong>ignore</strong> the denominator as it is equivalent across classes for a given set of $f_i$ tokens.</small>
+                </div>
                 </section>
                 <section>
                 <h2>Approximating Probabilities with Frequencies</h2>
                 <br />
                 <p style="text-align:left;"><span style="font-size:150%;">1. </span> $P(\text{spam}) = \frac{\lvert \text{spam} \rvert}{\lvert \text{spam} \rvert + \lvert \text{not spam} \rvert}$</p>
                 <br />
+                <div class="fragment">
                 <p style="text-align:left;"><span style="font-size:150%;">2. </span> $P(\text{not spam}) = \frac{\lvert \text{not spam} \rvert}{\lvert \text{spam} \rvert + \lvert \text{not spam} \rvert}$</p>
+                </div>
                 <br />
-                <p style="text-align:left;"><span style="font-size:150%;">3. </span> $P(w_i \mid \text{spam}) = \frac{\lvert w_i \text{ in spam}\rvert}{\lvert \text{spam} \rvert}$</p>
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">3. </span> $P(w_i \mid \text{spam}) = \frac{\lvert w_i \text{ in spam}\rvert}{\lvert w_* \text{ in spam} \rvert}$</p>
+                </div>
                 <br />
-                <p style="text-align:left;"><span style="font-size:150%;">4. </span> $P(w_i \mid \text{not spam}) = \frac{\lvert w_i \text{ in not spam} \rvert}{\lvert \text{not spam} \rvert}$</p>
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">4. </span> $P(w_i \mid \text{not spam}) = \frac{\lvert w_i \text{ in not spam} \rvert}{\lvert w_* \text{ in not spam} \rvert}$</p>
+                </div>
                 </section>
                 <section>
                 <h2>How do we get these values?</h2>
@@ -172,6 +196,35 @@
                 </section>
                 <section>
                 <h2><strong>So, let's start getting words!</strong></h2>
+                </section>
+                <section>
+                <h2>Anatomy of a Python Program</h2>
+<pre class="fragment"><code class="python">#!/usr/bin/env python</code></pre>
+<pre class="fragment"><code class="python">import fileinput
+import json</code></pre>
+<pre class="fragment"><code class="python">from sys import argv
+from base64 import b64encode</code></pre>
+<pre class="fragment"><code class="python">USAGE = '''%s &lt;list of file names&gt;'''</code></pre>
+<pre class="fragment"><code class="python">if __name__ == '__main__'&#58;</code></pre>
+<pre class="fragment"><code class="python">    if len(argv) &lt; 2:
+        print USAGE % argv[0]
+        exit(1)</code></pre>
+<pre class="fragment"><code class="python">    bag_of_words = []</code></pre>
+<pre class="fragment"><code class="python">    for line in fileinput.input():</code></pre>
+<pre class="fragment"><code class="python">        bag_of_words += [b64encode(token) for token in line.split()]</code></pre>
+<pre class="fragment"><code class="python">    print json.dumps(bag_of_words)</code></pre>
+                </section>
+                <section>
+                <h2>Obtain the Dataset</h2>
+<pre class="fragment"><code class="bash">cd /home/wolf/github</code></pre>
+<pre class="fragment"><code class="bash">wget 'gs9671.sp.cs.cmu.edu/CSDMC2010_SPAM_DATASET.tar.gz'</code></pre>
+<pre class="fragment"><code class="bash">tar xzf 'CSDMC2010_SPAM_DATASET.tar.gz'</code></pre>
+                </section>
+                <section>
+                <h3>Many Command Line Arguments</h3>
+<pre class="fragment"><code class="bash">find ham/*.eml -print0 | \ </code></pre>
+<pre class="fragment"><code class="bash">xargs -0 ./tokenize_files.py \ </code></pre>
+<pre class="fragment"><code class="bash">&gt; /tmp/log.json</code></pre>
                 </section>
 			</div>
 		</div>
