@@ -40,7 +40,37 @@
                 I propose to consider the question, &ldquo;Can machines think?"
                 </blockquote>
                 </strong>
-                <p style="text-align:right;">- Alan Turing (1952)</p>
+                <p style="text-align:right;">- Alan Turing (1950)</p>
+                </section>
+                <section>
+                <iframe width="1280" height="720" src="//www.youtube.com/embed/dU1xS07N-FA?rel=0" frameborder="0" allowfullscreen></iframe>
+                </section>
+                <section>
+                <iframe width="1280" height="720" src="//www.youtube.com/embed/JAFhkdGtHck?rel=0" frameborder="0" allowfullscreen></iframe>
+                </section>
+                <section>
+                <h3>How the Open Source World Works</h3>
+                <br />
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">1. </span> Someone <a href="https://github.com/redis/hiredis/issues/120">notices a problem</a></p>
+                </div>
+                <br />
+                <br />
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">2. </span> They <a href="https://github.com/redis/hiredis/pull/121">fix it</a></p>
+                </div>
+                <br />
+                <br />
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">3. </span> The project maintainer <a href="https://github.com/redis/hiredis/commit/37a840dc2c0899e032e0fb05a0813e137a68f032">approves and commits it</a></p>
+                </div>
+                <br />
+                <br />
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">4. </span> [Optional] Project maintainer <a href="https://github.com/redis/hiredis/issues/183">proposes best solution</a> for the future</p>
+                </div>
+                <br />
+                <p style="text-align:left;" class="fragment">A <a href="https://github.com/cmusatyalab/GigaSight/pull/2">second example</a></p>
                 </section>
 				<section>
 					<h1>Cyber Security</h1>
@@ -59,6 +89,11 @@
                 <h2 style="color:red;"><strong>Nothing is magical</strong></h2>
                 </section>
                 <section>
+                <h3 style="text-align:left;"><a href="https://news.ycombinator.com/item?id=6025144">Ask HN: Can we trust our CPUs?</a></h3>
+                <br />
+                <h3 style="text-align:left;"><a href="http://www.theregister.co.uk/2013/07/11/hp_prepping_fix_for_latest_storage_vuln/">HP admits to backdoors in storage products</a></h3>
+                </section>
+                <section>
                 <h2>Today?</h2>
                 <p style="text-align:left; color:red;">Focus on: parameter estimation</p>
                 <p style="text-align:left;">Build a Python-based parameter estimator</p>
@@ -66,15 +101,15 @@
                 </section>
                 <section>
                 <h2>Probability Notation</h2>
-                <p style="text-align:left;" class="fragment">$P(x)$: The probability of random event $x$, range $[0,1]$</p>
-                <p style="text-align:left;" class="fragment">$P(x \mid y)$: The probability of random event $x$ given random event $y$</p>
-                <p style="text-align:left;" class="fragment">$P(x,y)$: The probability of random events $x$ and $y$</p>
-                <p style="text-align:left;" class="fragment">$P(x,y) = P(x) * P(y)$: For independent events $x$ and $y$</p>
-                <p style="text-align:left;" class="fragment">$\lvert X \rvert$: The number of elements in <strong>set</strong> $X$</p>
+                <p style="text-align:left;" class="fragment">$P(x)$: <span class="fragment">Probability of event $x$, range $[0,1]$</span></p>
+                <p style="text-align:left;" class="fragment">$P(x \mid y)$: <span class="fragment">Probability of event $x$ given event $y$</span></p>
+                <p style="text-align:left;" class="fragment">$P(x,y)$: <span class="fragment">Probability of events $x$ and $y$</span></p>
+                <p style="text-align:left;" class="fragment">$P(x,y) =$ <span class="fragment">$P(x) * P(y)$</span>: For independent events $x$ and $y$</p>
+                <p style="text-align:left;" class="fragment">$\lvert X \rvert$: <span class="fragment">The number of elements in <strong>set</strong> $X$</span></p>
                 </section>
                 <section>
                 <h2>Bag of Words Model</h2>
-                <p style="text-align:left;" class="fragment">Think of all words in the spam or not spam classes as a <strong>giant unordered list</strong> independent from each other within each class.  Learn from all of them at once.</p>
+                <p style="text-align:left;" class="fragment">Think of all words in a spam email or not spam email as a <strong>giant unordered set</strong> independent from each other within each email.</p>
                 </section>
                 <section>
                 <h2>Na&iuml;ve Bayes Classification</h2>
@@ -94,7 +129,7 @@
                 <br />
                 $$P(C = \text{not spam} \mid F_1 = w_1, \ldots, F_n = w_n)$$
                 <br />
-                <p style="text-align:left;">where each $w_i$ is a word occurring in a query document.</p>
+                <p style="text-align:left;">where each $w_i$ is a unique word in a query document.</p>
                 </div>
                 </section>
                 <section>
@@ -139,20 +174,20 @@
                 </div>
                 </section>
                 <section>
-                <h2>Approximating Probabilities with Frequencies</h2>
+                <h3>Approximating Probabilities with Frequencies</h3>
                 <br />
-                <p style="text-align:left;"><span style="font-size:150%;">1. </span> $P(\text{spam}) = \frac{\lvert \text{spam} \rvert}{\lvert \text{spam} \rvert + \lvert \text{not spam} \rvert}$</p>
+                <p style="text-align:left;"><span style="font-size:150%;">1. </span> $P(\text{spam}) = $ <span class="fragment">$\frac{\lvert \text{spam} \rvert}{\lvert \text{spam} \rvert + \lvert \text{not spam} \rvert}$</span></p>
                 <br />
                 <div class="fragment">
-                <p style="text-align:left;"><span style="font-size:150%;">2. </span> $P(\text{not spam}) = \frac{\lvert \text{not spam} \rvert}{\lvert \text{spam} \rvert + \lvert \text{not spam} \rvert}$</p>
+                <p style="text-align:left;"><span style="font-size:150%;">2. </span> $P(\text{not spam}) = $ <span class="fragment">$\frac{\lvert \text{not spam} \rvert}{\lvert \text{spam} \rvert + \lvert \text{not spam} \rvert}$</span></p>
                 </div>
                 <br />
                 <div class="fragment">
-                <p style="text-align:left;"><span style="font-size:150%;">3. </span> $P(w_i \mid \text{spam}) = \frac{\lvert \text{spam containing } w_i\rvert}{\lvert \text{spam} \rvert}$</p>
+                <p style="text-align:left;"><span style="font-size:150%;">3. </span> $P(F_i = w_i \mid \text{spam}) = $ <span class="fragment">$\frac{\lvert \text{spam containing } w_i\rvert}{\lvert \text{spam} \rvert}$</span></p>
                 </div>
                 <br />
                 <div class="fragment">
-                <p style="text-align:left;"><span style="font-size:150%;">4. </span> $P(w_i \mid \text{not spam}) = \frac{\lvert \text{not spam containing } w_i \rvert}{\lvert w_* \text{not spam} \rvert}$</p>
+                <p style="text-align:left;"><span style="font-size:150%;">4. </span> $P(F_i = w_i \mid \text{not spam}) = $ <span class="fragment">$\frac{\lvert \text{not spam containing } w_i \rvert}{\lvert \text{not spam} \rvert}$</span></p>
                 </div>
                 </section>
                 <section>
@@ -160,6 +195,7 @@
                 </section>
                 <section>
                 <h3>Tokenize Each Email</h3>
+                <p>Update: take 1 file argument and produce a JSON-ized <strong>set</strong></p>
 <pre class="fragment"><code class="bash">for f in ham_extracted/*.eml</code></pre>
 <pre class="fragment"><code class="bash">    ./tokenize_file.py $f > ham_extracted/(basename $f).json</code></pre>
 <pre class="fragment"><code class="bash">end</code></pre>
