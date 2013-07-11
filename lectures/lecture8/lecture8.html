@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 8: Making Machines Learn (2)</title>
+
+		<meta name="description" content="Lesson 8 for SAMS 2013 CMU Class">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+                <section>
+                <strong>
+                <blockquote style="text-align:justify; color:red;">
+                I propose to consider the question, &ldquo;Can machines think?"
+                </blockquote>
+                </strong>
+                <p style="text-align:right;">- Alan Turing (1952)</p>
+                </section>
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Making Machines Learn (2)</h3>
+					<p>
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+                    <p><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+				</section>
+                <section>
+                <h2>Reinforcement Learning?</h2>
+                <iframe width="330" height="225" src="http://www.youtube.com/embed/VCdxqn0fcnE" frameborder="0" allowfullscreen></iframe>
+                <iframe width="330" height="225" src="http://www.youtube.com/embed/kN6ifrqwIMY" frameborder="0" allowfullscreen></iframe>
+                </section>
+                <section>
+                <h2 style="color:red;"><strong>Nothing is magical</strong></h2>
+                </section>
+                <section>
+                <h2>Today?</h2>
+                <p style="text-align:left; color:red;">Focus on: parameter estimation</p>
+                <p style="text-align:left;">Build a Python-based parameter estimator</p>
+                <p style="text-align:left;"><strong>Parameter:</strong> the probabilities we need to estimate to make a decision.</p>
+                </section>
+                <section>
+                <h2>Probability Notation</h2>
+                <p style="text-align:left;" class="fragment">$P(x)$: The probability of random event $x$, range $[0,1]$</p>
+                <p style="text-align:left;" class="fragment">$P(x \mid y)$: The probability of random event $x$ given random event $y$</p>
+                <p style="text-align:left;" class="fragment">$P(x,y)$: The probability of random events $x$ and $y$</p>
+                <p style="text-align:left;" class="fragment">$P(x,y) = P(x) * P(y)$: For independent events $x$ and $y$</p>
+                <p style="text-align:left;" class="fragment">$\lvert X \rvert$: The number of elements in <strong>set</strong> $X$</p>
+                </section>
+                <section>
+                <h2>Bag of Words Model</h2>
+                <p style="text-align:left;" class="fragment">Think of all words in the spam or not spam classes as a <strong>giant unordered list</strong> independent from each other within each class.  Learn from all of them at once.</p>
+                </section>
+                <section>
+                <h2>Na&iuml;ve Bayes Classification</h2>
+                <br />
+                $$P(C \mid F_1, \ldots, F_n)$$
+                <br />
+                <div class="fragment">
+                    <p style="text-align:left;">For us, we have two $c$ values in $C$: <strong>spam</strong> and <strong>not spam</strong>:</p>
+                </div>
+                <br />
+                <div class="fragment">
+                $$P(C = \text{spam} \mid F_1 = w_1, \ldots, F_n = w_n)$$
+                </div>
+                <br />
+                <div class="fragment">
+                <p style="text-align:left;">and,</p>
+                <br />
+                $$P(C = \text{not spam} \mid F_1 = w_1, \ldots, F_n = w_n)$$
+                <br />
+                <p style="text-align:left;">where each $w_i$ is a word occurring in a query document.</p>
+                </div>
+                </section>
+                <section>
+                <h2>Apply Bayes' Theorem (spam)</h2>
+                <br />
+                $$ P(A \mid B) = \frac{P(B \mid A) * P(A)}{P(B)}$$
+                <hr>
+                <br />
+                <div class="fragment">
+                $$P(C = \text{spam} \mid F_1 = w_1, \ldots, F_n = w_n) = $$
+                <br />
+                </div>
+                <div class="fragment">
+                $$\frac{P(F_1 = w_1, \ldots, F_n = w_n \mid \text{spam}) * P(\text{spam})}{P(F_1 = w_1, \ldots, F_n = w_n)}$$
+                </div>
+                </section>
+                <section>
+                <h3>Apply Independence Assumptions (na&iuml;ve)</h3>
+                <br />
+                $$P(x,y) = P(x) * P(y)$$
+                <br />
+                $$ P(A,D \mid B) = P(A \mid B) * P(D \mid B)$$ 
+                <hr>
+                <br />
+                <div class="fragment">
+                $$\frac{P(F_1 = w_1, \ldots, F_n = w_n \mid \text{spam}) * P(\text{spam})}{P(F_1 = w_1, \ldots, F_n = w_n)} = $$
+                <br />
+                </div>
+                <div class="fragment">
+                <span style="color:red;">$$\frac{P(F_1 = w_1 \mid \text{spam}) * \cdots * P(F_n = w_n \mid \text{spam}) * P(\text{spam})}{P(F_1 = w_1)  * \cdots * P(F_n = w_n)}$$</span>
+                </div>
+                </section>
+                <section>
+                <h3>Maximum a Posteriori (MAP) Decision Rule</h3>
+                <br />
+                $$ \text{classify}(f_1,\ldots,f_n) = $$
+                <br />
+                <div class="fragment" style="color:red;">
+                $$\mathop{\text{argmax}}\limits_c P(C = c) \displaystyle\prod\limits_{i=1}^n P(F_i = f_i \mid C = c)$$
+                <br />
+                <small>You can <strong>ignore</strong> the denominator as it is equivalent across classes for a given set of $f_i$ tokens.</small>
+                </div>
+                </section>
+                <section>
+                <h2>Approximating Probabilities with Frequencies</h2>
+                <br />
+                <p style="text-align:left;"><span style="font-size:150%;">1. </span> $P(\text{spam}) = \frac{\lvert \text{spam} \rvert}{\lvert \text{spam} \rvert + \lvert \text{not spam} \rvert}$</p>
+                <br />
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">2. </span> $P(\text{not spam}) = \frac{\lvert \text{not spam} \rvert}{\lvert \text{spam} \rvert + \lvert \text{not spam} \rvert}$</p>
+                </div>
+                <br />
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">3. </span> $P(w_i \mid \text{spam}) = \frac{\lvert \text{spam containing } w_i\rvert}{\lvert \text{spam} \rvert}$</p>
+                </div>
+                <br />
+                <div class="fragment">
+                <p style="text-align:left;"><span style="font-size:150%;">4. </span> $P(w_i \mid \text{not spam}) = \frac{\lvert \text{not spam containing } w_i \rvert}{\lvert w_* \text{not spam} \rvert}$</p>
+                </div>
+                </section>
+                <section>
+                <h2>Let's count them up!</h2>
+                </section>
+                <section>
+                <h3>Tokenize Each Email</h3>
+<pre class="fragment"><code class="bash">for f in ham_extracted/*.eml</code></pre>
+<pre class="fragment"><code class="bash">    ./tokenize_file.py $f > ham_extracted/(basename $f).json</code></pre>
+<pre class="fragment"><code class="bash">end</code></pre>
+                </section>
+                <section>
+                <h2>Create Counter in Python</h2>
+<pre class="fragment"><code class="python">#!/usr/bin/env python
+import json
+from sys import argv
+USAGE = '''%s &lt;list of file names&gt;'''
+if __name__ == '__main__':
+    if len(argv) &lt; 2:
+        print USAGE % argv[0]
+        exit(1)
+</code></pre>
+<pre class="fragment"><code class="python">    total_examples = len(argv) - 1</code></pre>
+<pre class="fragment"><code class="python">    counts = {}</code></pre>
+<pre class="fragment"><code class="python">    counts['total_examples'] = total_examples</code></pre>
+<pre class="fragment"><code class="python">    for i in xrange(1, len(argv), 1):</code></pre>
+<pre class="fragment"><code class="python">        with open(argv[i]) as f:</code></pre>
+<pre class="fragment"><code class="python">            tokens = json.load(f)</code></pre>
+<pre class="fragment"><code class="python">            for token in tokens:</code></pre>
+<pre class="fragment"><code class="python">                counts[token] = counts.get(token, 0) + 1</code></pre>
+<pre class="fragment"><code class="python">    print json.dumps(counts)</code></pre>
+            </section>
+            <section>
+            <h2>Run the Counter</h2>
+<pre class="fragment"><code class="bash">./nbayes_counter.py ham_extracted/*.json > ham_extracted/counts.json</code></pre>
+            </section>
+			</div>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+        <script type="text/javascript"
+            src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+       </script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
