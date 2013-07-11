@@ -1,3 +1,5 @@
 #!/usr/bin/fish
 
-find ham/*.eml -print0 | xargs -0 ./tokenize_files.py > /tmp/log.json
+for f in ham_extracted/*.eml
+    ./tokenize_file.py $f > ham_extracted/(basename $f).json
+end
