@@ -22,4 +22,4 @@ if __name__ == '__main__':
     for line in fileinput.input():
         bag_of_words.update(set([b64encode(token) for token in line.split()]))
 
-    print json.dumps(bag_of_words)
+    print json.dumps(list(bag_of_words))
