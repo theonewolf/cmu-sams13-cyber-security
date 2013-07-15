@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 10: Gaining Insight into Blackboxes</title>
+
+		<meta name="description" content="Lesson 10 for SAMS 2013 CMU Class">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+                <section>
+                <blockquote style="text-align:justify;">
+                &ldquo;In times of change, <strong>learners inherit the earth</strong>, while the
+                 learned find themselves beautifully equipped to deal with a world that no
+                 longer exists."</blockquote>
+                <p style="text-align:right;">- Eric Hoffer</p>
+                <p style="color:red;" class="fragment">Lesson: You can't stop learning.</p>
+                </section>
+                <section>
+                <iframe width="420" height="315" src="http://www.youtube.com/embed/05WS0WN7zMQ" frameborder="0" allowfullscreen></iframe>
+                </section>
+                <section>
+                <h1>GitHub + Accuracy</h1>
+                </section>
+                <section>
+                <h1>Testing Accuracy</h1>
+                <p style="text-align:left;"><span style="font-size:150%;">1. </span> Choose <strong>training set</strong></p>
+                <p style="text-align:left;"><span style="font-size:150%;">2. </span> Choose <strong>test set</strong></p>
+                <p style="text-align:left;"><span style="font-size:150%;">3. </span> <strong>Train</strong> classifier with training set</p>
+                <p style="text-align:left;"><span style="font-size:150%;">4. </span> <strong>Test</strong> classifier with test set</p>
+                </section>
+                <section>
+<pre><code class="python">#!/usr/bin/env python
+
+from random import shuffle
+from sys import argv
+
+USAGE = '''%s &lt;list of files to pick splits&gt;'''
+
+if __name__ == '__main__':
+    if len(argv) &lt; 2:
+        print USAGE % argv[0]
+        exit(1)
+
+    files = argv[1:]
+    shuffle(files)
+
+    print './nbayes_counter.py ',
+    for fname in files[1:int(len(files)*0.90)]:
+        print '%s ' % fname,
+
+    print ''
+    for fname in files[int(len(files)*0.90):]:
+        print './nbayes_decider.py ham_counts.json spam_counts.json %s' % fname
+</code></pre>
+                </section>
+                <section>
+                <h2>Calculating Accuracy</h2>
+                $$ \text{accuracy} = \frac{\lvert\text{TP}\rvert + \vert\text{TN}\rvert}{\lvert\text{TP}\rvert + \lvert\text{FP}\rvert + \lvert\text{TN}\rvert + \lvert\text{FN}\rvert}$$
+                </section>
+                <section>
+<pre><code class="python">#!/usr/bin/env python
+
+import fileinput
+from json import loads
+from sys import argv
+
+USAGE = '''%s &lt;results file&gt;'''
+
+if __name__ == '__main__':
+    if len(argv) &lt; 2:
+        print USAGE % argv[0]
+        exit(1)
+
+    total = 0
+    true_positives = 0
+    true_negatives = 0
+
+    for line in fileinput.input():
+        data = loads(line)
+
+        total += 1
+
+        if int(data['chosen_class']) == 2 and \
+           'spam' in data['file']:
+               true_positives += 1
+
+        if int(data['chosen_class']) == 1 and \
+           'ham' in data['file']:
+               true_negatives += 1
+
+    accuracy = float(true_positives + true_negatives) / (total)
+    print 'Accuracy ((TP + FP) / (TP + FP + FN + TN)) == %0.4f' % accuracy
+</code></pre>
+                </section>
+                <section>
+                <h2>wget <a href="http://goo.gl/vQVzp">http://goo.gl/vQVzp</a></h2>
+                </section>
+                <section>
+                <h1><a href="http://scikit-learn.org/stable/">scikit-learn</a></h1>
+                </section>
+                <section>
+                <h1>Leaking Information</h1>
+                </section>
+                <section>
+                <img src="euro.jpg"> 
+                </section>
+                <section>
+                <img src="vending.jpg"> 
+                </section>
+                <section>
+                <img src="atm.jpg">
+                </section>
+                <section>
+                <img src="euro-coins.jpg"> 
+                </section>
+                <section>
+                <img src="euro-tender.jpg"> 
+                </section>
+                <section>
+                <h1>Idea: RFID Tags!</h1>
+                </section>
+                <section>
+                <h2>This makes for <a href="http://www.eetimes.com/document.asp?doc_id=1225333">very efficient mugging.</a></h2>
+                </section>
+                <section>
+                <a href="http://www.nytimes.com/2013/07/15/business/attention-shopper-stores-are-tracking-your-cell.html?pagewanted=all&_r=0"><img src="cell_tracking.png"></a>
+                </section>
+                <section>
+                <video controls>
+                  <source src="baby.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> 
+                </section>
+                <section>
+                <video controls>
+                  <source src="baby_evm.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> 
+                </section>
+                <section>
+                <video controls>
+                  <source src="baby2.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> 
+                </section>
+                <section>
+                <video controls>
+                  <source src="baby2_evm.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> 
+                </section>
+                <section>
+                <video controls>
+                  <source src="wrist.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> 
+                </section>
+                <section>
+                <video controls>
+                  <source src="wrist_evm.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> 
+                </section>
+                <section>
+                <video controls>
+                  <source src="face.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> 
+                </section>
+                <section>
+                <video controls>
+                  <source src="face_evm.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video> 
+                </section>
+                <section>
+                <h3><a href="http://people.csail.mit.edu/mrub/vidmag/">Eulerian Video Magnification</a></h3>
+                </section>
+                <section>
+                <a href="http://sealedabstract.com/code/nsa-proof-your-e-mail-in-2-hours/"><img src="nsa_proof.png"></a>
+                </section>
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Gaining Insight into Blackboxes</h3>
+					<p>
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+                    <p><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+				</section>
+                <section>
+                <h2>Today</h2>
+                <p style="text-align:left;">Learn about <strong>defense in depth</strong> and <strong>the principle of least privilege</strong></p>
+                <p style="text-align:left;">Turn on defenses on our laptops</p>
+                <p style="text-align:left;">Investigate an unknown binary using <code>strace</code>.</p>
+                </section>
+                <section>
+                <h2><a href="http://en.wikipedia.org/wiki/Defense_in_depth_%28computing%29">Defense in Depth</a></h2>
+                <p style="text-align:justify;"><strong>Defend a system against any particular attack using several independent methods</strong>. Conceived by the <a href="http://www.nsa.gov/ia/_files/support/defenseindepth.pdf">National Security Agency (NSA)</a> as a comprehensive approach to information and electronic security.</p>
+                </section>
+                <section>
+                <h2>Setup Defenses</h2>
+                <p style="text-align:justify;" class="fragment"><strong>Firewall: </strong> <code>sudo ufw enable</code></p>
+                <p style="text-align:justify;" class="fragment"><strong>Virus Scanner: </strong> <code>sudo apt-get install clamav</code></p>
+                <p style="text-align:justify;" class="fragment"><strong>Integrity Scanner: </strong> <code>sudo apt-get install tripwire</code></p>
+                <p style="text-align:justify;" class="fragment"><strong>Checking Logs: </strong> <code>cd /var/log/</code></p>
+                <p style="text-align:justify;" class="fragment"><strong>Using <code>tail</code>: </strong> <code>sudo tail -f syslog</code></p>
+                </section>
+                <section>
+                <h2><a href="http://dl.acm.org/citation.cfm?doid=361011.361067">Principle of Least Privilege</a></h2>
+                <p style="text-align:justify;">Every program and every privileged user of the system 
+                should <strong>operate using the least amount of <span style="color:red;">access to resources</span>
+                    necessary to complete the job</strong>.</p>
+                </section>
+                <section>
+                <a href="http://blog.kotowicz.net/2013/07/jealous-of-prism-use-amazon-1-button.html"><img src="https_exploit_Amazon.png"></a>
+                </section>
+                <section>
+                <h2>Security through Obscurity?</h2>
+                <p style="text-align:justify;"><strong>Use secrecy of design or implementation to provide security.</strong></p>
+                <br />
+                <p style="text-align:justify; color:red;" class="fragment"><strong>Never achieves security.  Ever.</strong></p>
+                </section>
+                <section>
+                <h2>Kernel-Userspace Boundary</h2>
+                <p style="text-align:justify;">Using <code>strace</code> we can <span style="color:red;">sniff operations between programs and the kernel.</span></p>
+                <ul class="fragment">
+                    <li><code>open</code></li>
+                    <li><code>read</code></li>
+                    <li><code>write</code></li>
+                    <li><code>bind</code></li>
+                    <li><code>connect</code></li>
+                </ul>
+                </section>
+                <section>
+                <h1>Tell me what this <a href="http://goo.gl/7Ywgw">unknown binary</a> does.</h1>
+                <p style="color:red;">Hint: &nbsp; &nbsp;<code>man strace</code></p>
+                </section>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+        <script type="text/javascript"
+            src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+       </script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
