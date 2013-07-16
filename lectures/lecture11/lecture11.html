@@ -1,0 +1,220 @@
+<doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 11: Introducing Alice and Bob</title>
+
+		<meta name="description" content="Lesson 10 for SAMS 2013 CMU Class">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+                <section>
+                <a href="http://www.h-online.com/security/news/item/Critical-vulnerabilities-in-numerous-ASUS-routers-1918469.html"><img src="asus_routers.png"></a>
+                </section>
+                <section>
+                <h1>Tell me what this <a href="http://goo.gl/7Ywgw">unknown binary</a> does.</h1>
+                <p style="color:red;">Hint: &nbsp; &nbsp;<code>man strace</code></p>
+                </section>
+                <section>
+                <img src="beale_papers.gif">
+                </section>
+                <section>
+                <img src="voynich.jpg">
+                </section>
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Introducing Alice and Bob</h3>
+					<p style="text-align:center;">
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+                    <p style="text-align:center;"><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+				</section>
+                <section>
+                <h2>Cryptography</h2>
+                <p style="text-align:left;" class="fragment">The study of communicating securely in the presence of <strong>malicious third-parties</strong></p>
+                <p style="text-align:left;" class="fragment">Generally between <strong>Alice</strong> and <strong>Bob</strong></p>
+                <p style="text-align:left;" class="fragment">The eavesdropper <strong>Eve</strong> tries to listen in</p>
+                <p style="text-align:left;" class="fragment">Historically <strong>considered a weapon</strong>, <strong>illegal for export</strong> from US</p>
+                </section>
+                <section>
+                <h2>Plaintext, Ciphertext... ?</h2>
+                <p style="text-align:left;" class="fragment"><strong>Plaintext</strong> is an unencrypted message contents</p>
+                <p style="text-align:left;" class="fragment"><strong>Ciphertext</strong> is an encrypted message contents</p>
+                <p style="text-align:left;" class="fragment"><strong>$G$</strong> is a generator of randomness and/or keys</p>
+                <p style="text-align:left;" class="fragment"><strong>$E$</strong> is the function used to encrypt plaintext</p>
+                <p style="text-align:left;" class="fragment"><strong>$D$</strong> is the function used to decrypt plaintext</p>
+                <p style="text-align:left;" class="fragment"><strong>$k$</strong> is the key</p>
+                </section>
+                <section>
+                <h2>Security by Obscurity?</h2>
+                <pre><code>09 F9 11 02 9D 74 E3 5B D8 41 56 C5 63 56 88 C0</code></pre>
+                <h3 style="color:red;" class="fragment">An illegal number!</h3>
+                </section>
+                <section>
+                <h1><a href="http://en.wikipedia.org/wiki/Code_(cryptography)">Code</a></h1>
+                <p style="text-align:left;" class="fragment"><strong>Codes</strong> act by replacing words in the plaintext.</p>
+                <p style="text-align:left;" class="fragment"><strong>Historical Usage:</strong> Navajo codetalkers during WWII</p>
+                <br />
+                <div class="fragment">
+                    <p><strong>Examples:</strong>
+                    <p style="text-align:left;">airplane : haddle</p>
+                    <p style="text-align:left;">light : buto</p>
+                    <p style="text-align:left;">help : wazo</p>
+                </div>
+                </section>
+                <section>
+                <h1><a href="https://en.wikipedia.org/wiki/Cipher">Cipher</a></h1>
+                <p class="fragement"><strong>Ciphers</strong> act by replacing or transforming letters.</p>
+                <p class="fragment"><strong>Historical Usage:</strong> <a href="http://en.wikipedia.org/wiki/Caesar_cipher">Caesar cipher</a>, German <a href="https://en.wikipedia.org/wiki/Enigma_machine">ENIGMA</a> (WWII)</p>
+                <pre class="fragment"><code>Plain:    ABCDEFGHIJKLMNOPQRSTUVWXYZ
+Cipher:   XYZABCDEFGHIJKLMNOPQRSTUVW</code></pre>
+                <div class="fragment">
+                    <p><strong>Example:</strong></p>
+                    <pre><code>Ciphertext: QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
+Plaintext:  the quick brown fox jumps over the lazy dog</code></pre>
+                </div>
+                </section>
+                <section>
+                <h1>Symmetric Ciphers</h1>
+                <p><strong>The same key</strong> ($k$) is used for encryption and decryption.</p>
+                <p class="fragment">All functions depend $k$: $D_k$, $E_k$</p>
+                <p class="fragment">Bob: use $k$ to encrypt/decrypt</p>
+                <p class="fragment">Alice: use $k$ to encrypt/decrypt</p>
+                <p class="fragment">Eve: intercept/steal $k$</p>
+                </section>
+                <section>
+                <h3><a href="https://en.wikipedia.org/wiki/Pseudorandom_number_generator">Pseudo-Random Number Generators</a></h3>
+                <p><strong>Algorithm</strong> for generating a sequence of numbers that approximates the properties of random numbers.</p>
+                <p style="color:red;" class="fragment">Generally never truly secure (repeats)!</p>
+                </section>
+                <section>
+                <h1>Public-Key Ciphers</h1>
+                <p><strong>Different keys</strong> ($k[\text{public}], k[\text{private}]$) are used for encryption and decryption.</p>
+                <p class="fragment">Functions use different keys: $D_{k[\text{private}]}$, $E_{k[\text{public}]}$</p>
+                <p class="fragment">Bob: use $k_{\text{alice}}[\text{public}]$ to encrypt, $k_{\text{bob}}[\text{private}]$ to decrypt</p>
+                <p class="fragment">Alice: use $k_{\text{bob}}[\text{public}]$ to encrypt, $k_{\text{alice}}[\text{private}]$ to decrypt</p>
+                <p class="fragment">Eve: intercept/steal both private keys $k_{bob}[\text{private}]$ and $k_{alice}[\text{private}]$</p>
+                </section>
+                <section>
+                <h3>Perfect Secrecy: <a href="https://en.wikipedia.org/wiki/One-time_pad">One-Time Pad</a></h3>
+                <p class="fragment">An encryption scheme ($G$,$E$,$D$) over message-space $M$ and key-space $K$ is said to be perfectly secret if for all messages $m_1,m_2 \in M$ and all ciphertexts $c$ we have:</p>
+                <div class="fragment">
+                    $$P(k \gets G : E_k(m_1) = c) = P (k \gets G : E_k(m_2) = c)$$
+                </div>
+                </section>
+                <section>
+                <h3>The Vernam Cipher</h3>
+                <p><strong>Logical xor</strong> each bit of plaintext with each bit of the key.  Keys <strong>must be the same length</strong> as the input plaintext, and <strong>must come from a true random source</strong>.</p>
+                <p style="color:red;" class="fragment">I call the random constraint on the key the &ldquo;Mauborgne Constraint."</p>
+                </section>
+                <section>
+                <h3>Understanding <strong>xor</strong></h3>
+                <br />
+                <div align="center">
+                <table> 
+                    <thead>
+                        <tr><th>$b_1$</th><th>$b_2$</th><th>$\oplus$</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fragment"><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td></tr>
+                        <tr class="fragment"><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">1</td></tr>
+                        <tr class="fragment"><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td></tr>
+                        <tr class="fragment"><td style="text-align:center;">1</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td></tr>
+                    </tbody>
+                </table>
+                </div>
+                </section>
+                <section>
+                <h3><strong>xor</strong> Crypto</h3>
+                <br />
+                <div align="center">
+                <table cellspacing="35" style="border:1px solid #FF0000;"> 
+                    <thead>
+                        <tr><th></th><th></th><th>ciphertext</th><th></th><th>plaintext</th></tr>
+                        <tr><th>plaintext</th><th>$k$</th><th>$E_k = \oplus$</th><th>$k$</th><th>$D_k = \oplus$</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fragment"><td style="text-align:center;"><strong>0</strong></td><td style="text-align:center;">0</td><td style="text-align:center;" class="fragment">0</td><td style="text-align:center;" class="fragment">0</td><td style="text-align:center;" class="fragment"><strong>0</strong></td></tr>
+                        <tr class="fragment"><td style="text-align:center;"><strong>0</strong></td><td style="text-align:center;">1</td><td style="text-align:center;" class="fragment">1</td><td style="text-align:center;" class="fragment">1</td><td style="text-align:center;" class="fragment"><strong>0</strong></td></tr>
+                        <tr class="fragment"><td style="text-align:center;"><strong>1</strong></td><td style="text-align:center;">0</td><td style="text-align:center;" class="fragment">1</td><td style="text-align:center;" class="fragment">0</td><td style="text-align:center;" class="fragment"><strong>1</strong></td></tr>
+                        <tr class="fragment"><td style="text-align:center;"><strong>1</strong></td><td style="text-align:center;">1</td><td style="text-align:center;" class="fragment">0</td><td style="text-align:center;" class="fragment">1</td><td style="text-align:center;" class="fragment"><strong>1</strong></td></tr>
+                    </tbody>
+                </table>
+                </div>
+                </section>
+                <section>
+                <h1>Perfect?</h1>
+                <p><strong>Idea:</strong>Given a truly random key $k$,</p>
+                <div class="fragment">$P(E_k = 0 \vert \text{plaintext} = 0) = $ <span class="fragment">$ \frac{1}{2}$</span></div>
+                <br />
+                <div class="fragment">$P(E_k = 1 \vert \text{plaintext} = 0) = $ <span class="fragment">$ \frac{1}{2}$</span></div>
+                <p class="fragment">and,</p>
+                <div class="fragment">$P(E_k = 0 \vert \text{plaintext} = 1) = $ <span class="fragment">$ \frac{1}{2}$</span></div>
+                <br />
+                <div class="fragment">$P(E_k = 1 \vert \text{plaintext} = 1) = $ <span class="fragment">$ \frac{1}{2}$</span></div>
+                </section>
+                <section>
+                <h2 style="text-align:justify;">Breaking a Vernam Cipher when a real random one-time pad was used reduces to either <span style="color:red;">guessing all possible keys</span>, and, therefore <strong>all possible messages</strong>, or <span style="color:red;">stealing the key.</span></h2>
+                </section>
+                <section><h1>Let's code it!</h1></section>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+        <script type="text/javascript"
+            src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+       </script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
