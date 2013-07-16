@@ -260,6 +260,7 @@ body {
 }
 
 .reveal p {
+    text-align: justify;
 	margin-bottom: 10px;
 	line-height: 1.2em;
 }
