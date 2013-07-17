@@ -1,0 +1,202 @@
+<doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 12: Key Exchange?</title>
+
+		<meta name="description" content="Lesson 12 for SAMS 2013 CMU Class">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+                <section>
+                <h3><a href="http://blog.sucuri.net/2013/07/malware-hidden-inside-jpg-exif-headers.html">Malware Hidden Inside JPG EXIF Headers</a></h3>
+                </section>
+                <section>
+                <h2>Present or Poster?</h2>
+                <p>git, Python</p>
+                <p>Hashes</p>
+                <p>Password cracking</p>
+                <p>Virtual Machines</p>
+                <p>Trojans, Worms, Viruses</p>
+                <p>Virus scanning</p>
+                <p>Networking tools and terms</p>
+                <p>ARP poisoning</p>
+                <p>Firewalls</p>
+                <p>Intrusion Detection Systems, Log monitoring</p>
+                <p>Spam filtering (machine learning)</p>
+                <p>Cryptography and Cryptanalysis</p>
+                </section>
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Key Exchange?</h3>
+					<p style="text-align:center;">
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+                    <p style="text-align:center;"><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+				</section>
+                <section>
+                <h2>Plaintext, Ciphertext... ?</h2>
+                <p style="text-align:left;" class="fragment"><strong>Plaintext</strong><span class="fragment"> is an unencrypted message contents</span></p>
+                <p style="text-align:left;" class="fragment"><strong>Ciphertext</strong><span class="fragment"> is an encrypted message contents</span></p>
+                <p style="text-align:left;" class="fragment"><strong>$G$</strong><span class="fragment"> is a generator of randomness and/or keys</span></p>
+                <p style="text-align:left;" class="fragment"><strong>$E$</strong><span class="fragment"> is the function used to encrypt plaintext</span></p>
+                <p style="text-align:left;" class="fragment"><strong>$D$</strong><span class="fragment"> is the function used to decrypt plaintext</span></p>
+                <p style="text-align:left;" class="fragment"><strong>$k$</strong><span class="fragment"> is the key</span></p>
+                </section>
+                <section>
+                <h1><a href="https://en.wikipedia.org/wiki/Cipher">Cipher</a></h1>
+                <p class="fragement"><strong>Ciphers</strong><span class="fragment"> act by replacing or transforming letters.</span></p>
+                </section>
+                <section>
+                <h1>Symmetric Ciphers</h1>
+                <p><strong>The same key</strong> ($k$) is used for encryption and decryption.</p>
+                <p class="fragment">All functions depend $k$: $D_k$, $E_k$</p>
+                <p class="fragment">Bob: use $k$ to encrypt/decrypt</p>
+                <p class="fragment">Alice: use $k$ to encrypt/decrypt</p>
+                <p class="fragment">Eve: intercept/steal $k$</p>
+                </section>
+                <section>
+                <h1>Public-Key Ciphers</h1>
+                <p><strong>Different keys</strong> ($k[\text{public}], k[\text{private}]$) are used for encryption and decryption.</p>
+                <p class="fragment">Functions use different keys: $D_{k[\text{private}]}$, $E_{k[\text{public}]}$</p>
+                <p class="fragment">Bob: use $k_{\text{alice}}[\text{public}]$ to encrypt, $k_{\text{bob}}[\text{private}]$ to decrypt</p>
+                <p class="fragment">Alice: use $k_{\text{bob}}[\text{public}]$ to encrypt, $k_{\text{alice}}[\text{private}]$ to decrypt</p>
+                <p class="fragment">Eve: intercept/steal both private keys $k_{bob}[\text{private}]$ and $k_{alice}[\text{private}]$</p>
+                </section>
+                <section>
+                <h3>Perfect Secrecy: <a href="https://en.wikipedia.org/wiki/One-time_pad">One-Time Pad</a></h3>
+                <p class="fragment">An encryption scheme ($G$,$E$,$D$) over message-space $M$ and key-space $K$ is said to be perfectly secret if for all messages $m_1,m_2 \in M$ and all ciphertexts $c$ we have:</p>
+                <div class="fragment">
+                    $$P(k \gets G : E_k(m_1) = c) = P (k \gets G : E_k(m_2) = c)$$
+                </div>
+                </section>
+                <section>
+                <h3>The Vernam Cipher</h3>
+                <p><strong>Logical xor</strong> each bit of plaintext with each bit of the key.  Keys <strong>must be the same length</strong> as the input plaintext, and <strong>must come from a true random source</strong>.</p>
+                <p style="color:red;" class="fragment">I call the random constraint on the key the &ldquo;Mauborgne Constraint."</p>
+                </section>
+                <section>
+                <h3>Understanding <strong>xor</strong></h3>
+                <br />
+                <div align="center">
+                <table> 
+                    <thead>
+                        <tr><th>$b_1$</th><th>$b_2$</th><th>$\oplus$</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fragment"><td style="text-align:center;">0</td><td style="text-align:center;">0</td><td style="text-align:center;">0</td></tr>
+                        <tr class="fragment"><td style="text-align:center;">0</td><td style="text-align:center;">1</td><td style="text-align:center;">1</td></tr>
+                        <tr class="fragment"><td style="text-align:center;">1</td><td style="text-align:center;">0</td><td style="text-align:center;">1</td></tr>
+                        <tr class="fragment"><td style="text-align:center;">1</td><td style="text-align:center;">1</td><td style="text-align:center;">0</td></tr>
+                    </tbody>
+                </table>
+                </div>
+                </section>
+                <section>
+                <h3><strong>xor</strong> Crypto</h3>
+                <br />
+                <div align="center">
+                <table cellspacing="35" style="border:1px solid #FF0000;"> 
+                    <thead>
+                        <tr><th></th><th></th><th>ciphertext</th><th></th><th>plaintext</th></tr>
+                        <tr><th>plaintext</th><th>$k$</th><th>$E_k = \oplus$</th><th>$k$</th><th>$D_k = \oplus$</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr class="fragment"><td style="text-align:center;"><strong>0</strong></td><td style="text-align:center;">0</td><td style="text-align:center;" class="fragment">0</td><td style="text-align:center;" class="fragment">0</td><td style="text-align:center;" class="fragment"><strong>0</strong></td></tr>
+                        <tr class="fragment"><td style="text-align:center;"><strong>0</strong></td><td style="text-align:center;">1</td><td style="text-align:center;" class="fragment">1</td><td style="text-align:center;" class="fragment">1</td><td style="text-align:center;" class="fragment"><strong>0</strong></td></tr>
+                        <tr class="fragment"><td style="text-align:center;"><strong>1</strong></td><td style="text-align:center;">0</td><td style="text-align:center;" class="fragment">1</td><td style="text-align:center;" class="fragment">0</td><td style="text-align:center;" class="fragment"><strong>1</strong></td></tr>
+                        <tr class="fragment"><td style="text-align:center;"><strong>1</strong></td><td style="text-align:center;">1</td><td style="text-align:center;" class="fragment">0</td><td style="text-align:center;" class="fragment">1</td><td style="text-align:center;" class="fragment"><strong>1</strong></td></tr>
+                    </tbody>
+                </table>
+                </div>
+                </section>
+                <section>
+                <h1>Perfect!</h1>
+                <p><strong>Idea:</strong>Given a truly random key $k$,</p>
+                <div class="fragment">$P(E_k = 0 \vert \text{plaintext} = 0) = $ <span class="fragment">$ \frac{1}{2}$</span></div>
+                <br />
+                <div class="fragment">$P(E_k = 1 \vert \text{plaintext} = 0) = $ <span class="fragment">$ \frac{1}{2}$</span></div>
+                <p class="fragment">and,</p>
+                <div class="fragment">$P(E_k = 0 \vert \text{plaintext} = 1) = $ <span class="fragment">$ \frac{1}{2}$</span></div>
+                <br />
+                <div class="fragment">$P(E_k = 1 \vert \text{plaintext} = 1) = $ <span class="fragment">$ \frac{1}{2}$</span></div>
+                </section>
+                <section>
+                <h1>Diffie-Hellman</h1>
+                <p class="fragment">Method of <strong>exchanging keys publicly.</strong></p>
+                <p style="color:red;" class="fragment">Works by creating a <strong>shared secret</strong> between Alice and Bob.</p>
+                </section>
+                <section>
+                <img src="dh-exchange.svg">
+                </section>
+                <section>
+                <p><span style="color:red;">Public</span><span style="color:blue; padding-left:4em;">Private</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:green; padding-left:4em;">Shared Secret</span></p>
+                <br /><br />
+                <p class="fragment">Alice and Bob publicly agree on <span style="color:red;">$p = 23, g = 5$</span></p>
+                <p class="fragment">Alice chooses <span style="color:blue">$a = 6$</span>, sends Bob <span style="color:red;">$A = 5^6 \text{mod} 23 = 8$</span></p>
+                <p class="fragment">Bob chooses <span style="color:blue">$b = 15$</span>, sends Alice <span style="color:red;">$B = 5^{15} \text{mod} 23 = 19$</span></p>
+                <p class="fragment">Alice computes <span style="color:green;">$s = 19^6 \text{mod} 23 = 2$</span></p>
+                <p class="fragment">Bob computes <span style="color:green;">$s = 8^{15} \text{mod} 23 = 2$</span></p>
+                <p class="fragment" style="font-size:125%;">$(g^a)^b = (g^b)^a$ $\text{mod} p$</p>
+                </section>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+        <script type="text/javascript"
+            src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+       </script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
