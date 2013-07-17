@@ -2,7 +2,11 @@
 
 
 
-'''USAGE: %s <pi file> <offset> <length>'''
+from sys import argv
+
+
+
+USAGE = '''%s <pi file> <offset> <length>'''
 
 
 
