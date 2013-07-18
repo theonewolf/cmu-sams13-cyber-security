@@ -1,0 +1,159 @@
+<doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Lecture 13: Public-Key Cryptography in Practice</title>
+
+		<meta name="description" content="Lesson 12 for SAMS 2013 CMU Class">
+		<meta name="author" content="Wolfgang Richter">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="../css/reveal.css">
+		<link rel="stylesheet" href="../css/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="../css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="../css/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+                <section>
+                <h1>Getting a Good G</h1>
+                <a href="http://scruss.com/blog/2013/06/07/well-that-was-unexpected-the-raspberry-pis-hardware-random-number-generator/"><img src="rpi.jpg" style="position:relative; height:550px;"></a>
+                <h1 class="fragment" style="top:350px; position:absolute; color:red; height=4em; margin-left:7%; background: rgba(0, 0, 0, 0.8);">$25 Computer</h1>
+                </section>
+                <section>
+                <img src="rpi2.jpg">
+                </section>
+                <section>
+                <h1>Visualizing Randomness</h1>
+                <pre><code class="bash">cat /dev/urandom |\
+ rawtoppm -rgb 256 256 |\
+ pnmtopng &gt;\
+ random(date +%Y%m%d%H%M%S).png</code></pre>
+                </section>
+                <section>
+                <h1>Google Group!</h1>
+                </section>
+				<section>
+					<h1>Cyber Security</h1>
+					<h3>Public-Key Cryptography in Practice</h3>
+					<p style="text-align:center;">
+                    <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
+					</p>
+                    <p style="text-align:center;"><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+				</section>
+                <section>
+                <h2>Public-Key Ciphers</h2>
+                <p class="fragment"><strong>Different keys</strong> ($k[\text{public}], k[\text{private}]$) are used for encryption and decryption.</p>
+                <p class="fragment">Functions use different keys: $D_{k[\text{private}]}$, $E_{k[\text{public}]}$</p>
+                <p class="fragment">Bob: <span class="fragment">use $k_{\text{alice}}[\text{public}]$ to encrypt, $k_{\text{bob}}[\text{private}]$ to decrypt</span></p>
+                <p class="fragment">Alice: <span class="fragment">use $k_{\text{bob}}[\text{public}]$ to encrypt, $k_{\text{alice}}[\text{private}]$ to decrypt</span></p>
+                <p class="fragment">Eve: <span class="fragment">intercept/steal both private keys $k_{bob}[\text{private}]$ and $k_{alice}[\text{private}]$</span></p>
+                </section>
+                <section>
+                <h2>Generating Your Keys</h2>
+                <pre style="font-size:150%"><code class="bash">gpg --gen-key</code></pre>
+                <pre class="fragment" style="font-size:150%"><code class="bash">gpg --list-keys</code></pre>
+                </section>
+                <section>
+                <h2>Publishing Your Public Key</h2>
+                <pre style="font-size:150%"><code class="bash">gpg --armor --export XXXX</code></pre>
+                </section>
+                <section>
+                <h2>Importing Public Keys</h2>
+                <pre style="font-size:150%"><code class="bash">gpg --import FILE</code></pre>
+                </section>
+                <section>
+                <h2>Digitally Signing Documents</h2>
+                <pre style="font-size:150%"><code class="bash">gpg --local-user XXXX\
+ --clearsign FILE</code></pre>
+                </section>
+                <section>
+                <h2>Verifying Digital Signatures</h2>
+                <pre style="font-size:150%"><code class="bash">gpg --verify FILE</code></pre>
+                </section>
+                <section>
+                <h2>Encrypting Documents</h2>
+                <pre style="font-size:150%"><code class="bash">gpg --armor\
+ --recipient XXXX\
+ --encrypt FILE</code></pre>
+                </section>
+                <section>
+                <h2>Decrypting Documents</h2>
+                <pre style="font-size:150%"><code class="bash">gpg --decrypt FILE</code></pre>
+                </section>
+                <section>
+                <h3>How to trust a key?</h3>
+                <p class="fragment">Look at <strong>who signed it</strong></p>
+                <p class="fragment">Called the <a href="http://en.wikipedia.org/wiki/Web_of_trust">web of trust</a></p>
+                <h2 class="fragment">Key Signing Party Time!</h2>
+                </section>
+                <section>
+                <h2>Signing a Key</h2>
+                <pre style="font-size:150%"><code class="bash">gpg --local-user XXXX\
+ --sign-key YYYY</code></pre>
+                </section>
+                <section>
+                <h3>Is this how <strong>HTTPS</strong> websites use public-key cryptography?</h3>
+                <br />
+                <p class="fragment">Instead of a <strong>web of trust</strong>, they are organized with <strong>trusted authorities</strong> in a system called <a href="http://en.wikipedia.org/wiki/Public-key_infrastructure">Public-Key Infrastructure</a></p>
+                </section>
+                <section>
+                <img src="purple_wolf_o.jpg">
+                </section>
+                <section>
+                <img src="purple_wolf.jpg">
+                </section>
+		</div>
+
+		<script src="../js/head.min.js"></script>
+		<script src="../js/reveal.min.js"></script>
+        <script type="text/javascript"
+            src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+       </script>
+       <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+       </script>
+
+		<script>
+			Reveal.initialize({
+                rollingLinks: false,
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme,
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				dependencies: [
+					{ src: '../js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../js/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../js/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: '../js/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+	</body>
+</html>
