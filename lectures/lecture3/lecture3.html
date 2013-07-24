@@ -36,39 +36,87 @@
 			<div class="slides">
 				<section>
 					<h1>Cyber Security</h1>
-					<h3>Hands-On Cracking and Experimental Setup</h3>
-					<p>
+					<h3>Hands-On Cracking</h3>
+					<p style="text-align:center;">
                     <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
 					</p>
-                    <p><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+                    <p style="text-align:center;"><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
 				</section>
-                <section>
-                <h2>Goals</h2>
-                <p style="text-align:left;"><span style="font-size:200%;">1</span>Load Windows XP Raw Disk</p>
-                <p style="text-align:left;"><span style="font-size:200%;">2</span>Load Rainbow Tables</p>
-                <p style="text-align:left;"><span style="font-size:200%;">3</span>Create Cracking Script</p>
-                <p style="text-align:left;"><span style="font-size:200%;">4</span>Create GitHub Repository for Cracking Script</p>
-                <p style="text-align:left;"><span style="font-size:200%;">5</span>Load Windows XP VM and Create New User/Password</p>
-                </section>
                 <section>
                 <h2>Unpatched Windows</h2>
                 <a href="https://isc.sans.edu/survivaltime.html"><img src="survivalgraph.png"></a>
                 </section>
                 <section>
-                <h2>End-Game Idea</h2>
-                <p style="text-align:justify;">A <b>honeypot</b> is a system placed online with explicit
-                security vulnerabilities.  It is designed to
-                <b>attract hackers</b> with two goals: <b>monitoring
-                their actions</b> and <b>capturing their tools</b>.</p>
-                <img src="honeypot.jpg">
+                <a href="http://ubuntuforums.org/announce.html"><img src="ubuntu_hacked.png"></a>
                 </section>
                 <section>
-                <h2>Example Attack (gs9671)</h2>
-                <pre><code>Jun 30 23:21:24 gs9671 sshd[19668]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=burl-mse-71-255-157-150.static.ngn.east.myfairpoint.net  user=root
-Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): getting password (0x00000388)
-Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): pam_get_item returned a password
-Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): request wbcLogonUser failed: WBC_ERR_AUTH_ERROR, PAM error: PAM_USER_UNKNOWN (10), NTSTATUS: NT_STATUS_NO_SUCH_USER, Error message was: No such user
+                <h1 style="color:red;">Plaintext?</h1>
+                <img src="yahoo.png" class="fragment">
+                </section>
+                <section>
+                <img src="google_sms.png">
+                </section>
+                <section>
+                <img src="verify_identity.png">
+                </section>
+                <section>
+                <h2>Goals</h2>
+                <p style="text-align:left;"><span style="font-size:200%;">1</span>Review Hashes</p>
+                <p style="text-align:left;"><span style="font-size:200%;">2</span>Create Our Own Hash Function</p>
+                <p style="text-align:left;"><span style="font-size:200%;">3</span>Create Cracking Scripts</p>
+                <p style="text-align:left;"><span style="font-size:200%;">4</span>Investigate Yahoo and LinkedIn Passwords</p>
+                </section>
+                <section>
+                <h2>Hashes</h2>
+                <p style="text-align:justify;" class="fragment"><span style="font-size:200%;">1</span>Take an <b>arbitrary amount of bytes</b> <span class="fragment">and map them into a
+                    <b>fixed size amount of bytes.</b></span></p>
+                <p style="text-align:justify;" class="fragment"><span style="font-size:200%;">2</span>Use a <b>one-way function</b>: <span class="fragment">simple to compute, difficult to reverse.</span></p>
+                <p style="text-align:justify;" class="fragment"><span style="font-size:200%;">3</span>Ideally it is also <b>injective</b>: <span class="fragment">mapping each valid input to a <b>distinct</b> hash value.</span></p>
+                <img src="../lecture2/hash_table.svg">
+                </section>
+                <section>
+                <h2>Practical Hashing</h2>
+                <p class="fragment">Achieves the <b>first two</b> properties, but generally only the <b>first</b>.</p>
+                </section>
+                <section>
+                <iframe width="1280" height="720" src="//www.youtube.com/embed/dU1xS07N-FA?rel=0" frameborder="0" allowfullscreen></iframe>
+                </section>
+                <section>
+                <pre><code class="python">#!/usr/bin/env python</code></pre>
+<pre class="fragment"><code class="python">import math
+import sys</code></pre>
+<pre class="fragment"><code class="python">__USAGE__ = '''%s &lt;file to hash&gt;'''</code></pre>
+<pre class="fragment"><code class="python">def long_to_bytearray(l):
+    return bytearray.fromhex(hex(l)[2:-1])</code></pre>
+<pre class="fragment"><code class="python">def SAMS_hash(data):
+    pass</code></pre>
+<pre class="fragment"><code class="python">if __name__ == '__main__':</code></pre>
+<pre class="fragment"><code class="python">    if len(sys.argv) &lt; 2:
+        print __USAGE__ % sys.argv[0]
+        exit(1)</code></pre>
+<pre class="fragment"><code class="python">    with open(sys.argv[1]) as f:
+        data = f.read()
+        print SAMS_hash(data)</code></pre>
 </code></pre>
+                </section>
+                <section>
+                <h2>Choose your own hash adventure...</h2>
+                <h3><a href="http://goo.gl/miinrh">http://goo.gl/miinrh</a></h3>
+                <p style="color:red;">Easy to use <a href="http://primes.utm.edu/lists/2small/0bit.html">primes reference</a>.</p>
+                </section>
+                <section>
+                <h2>Ophcrack is scriptable</h2>
+                <a href="http://goo.gl/vawLnv">http://goo.gl/vawLnv</a>
+                </section>
+                <section>
+                <h2>Yahoo and LinkedIn Leaks</h2>
+                <p>Yahoo: <a href="http://goo.gl/Q1OeGj">http://goo.gl/Q1OeGj</a></p>
+                <p>LinkedIn: <a href="http://goo.gl/nKfPAa">http://goo.gl/nKfPAa</a></p>
+                </section>
+                <section>
+                <h2>Cracking LinkedIn</h2>
+                <p>Dictionary: <a href="http://goo.gl/dOL1Hz">http://goo.gl/dOL1Hz</a></p>
+                <p style="color:red; font-size:500%; text-align:center;" class="fragment"><a href="http://hashcat.net/hashcat/">Hashcat</a></p>
                 </section>
 			</div>
 		</div>
