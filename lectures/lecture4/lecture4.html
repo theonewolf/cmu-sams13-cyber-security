@@ -37,20 +37,64 @@
 				<section>
 					<h1>Cyber Security</h1>
 					<h3>Finishing Cracking, Moving Onto Backdoors</h3>
-					<p>
+					<p style="text-align:center;">
                     <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
 					</p>
-                    <p><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+                    <p style="text-align:center;"><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
 				</section>
+                <section>
+                <ol>
+                <li><strong>512 bytes</strong> (1024)</li>
+                    <ul class="fragment">
+                        <li>680 unique (xor)</li>
+                        <li>1024 unique (multiply)</li>
+                        <li>680 unique (xor+shift)</li>
+                    </ul>
+                <li class="fragment"><strong>512 Kibibytes</strong> (1024)</li>
+                    <ul class="fragment">
+                        <li>1006 unique (xor)</li>
+                        <li>1024 unique (multiply)</li>
+                        <li>1006 unique (xor+shift)</li>
+                    </ul>
+                <li class="fragment"><strong>10 Mibibytes</strong> (1024)</li>
+                    <ul class="fragment">
+                        <li>1024 unique (xor)</li>
+                        <li>1024 unique (multiply)</li>
+                        <li>1024 unique (xor+shift)</li>
+                    </ul>
+                </ol>
+                </section>
                 <section>
                 <h2>Google, Sign out of all other sessions!</h2>
                 </section>
                 <section>
+                <img src="bot_wars.png">
+                </section>
+                <section>
                 <h2>Goals</h2>
-                <p style="text-align:left;"><span style="font-size:200%;">1</span>Create GitHub Repository for Cracking Script</p>
-                <p style="text-align:left;"><span style="font-size:200%;">2</span>Load Windows XP VM and Create New User/Password</p>
-                <p style="text-align:left;"><span style="font-size:200%;">3</span>Shutdown Windows XP VM and Crack New User/Password</p>
-                <p style="text-align:left;"><span style="font-size:200%;">4</span>Infect VM with Trojan backdoor</p>
+                <p style="text-align:left;"><span style="font-size:200%;">1</span>Review Hashes</p>
+                <p style="text-align:left;"><span style="font-size:200%;">2</span>Investigate Yahoo and LinkedIn Leaks</p>
+                <p style="text-align:left;"><span style="font-size:200%;">3</span>Infect VM with Trojan backdoor</p>
+                </section>
+                <section>
+                <h2>Hashes</h2>
+                <p style="text-align:justify;" class="fragment"><span style="font-size:200%;">1</span>Take an <b>arbitrary amount of bytes</b> <span class="fragment">and map them into a
+                    <b>fixed size amount of bytes.</b></span></p>
+                <p style="text-align:justify;" class="fragment"><span style="font-size:200%;">2</span>Use a <b>one-way function</b>: <span class="fragment">simple to compute, difficult to reverse.</span></p>
+                <p style="text-align:justify;" class="fragment"><span style="font-size:200%;">3</span>Ideally it is also <b>injective</b>: <span class="fragment">mapping each valid input to a <b>distinct</b> hash value.</span></p>
+                <img src="../lecture2/hash_table.svg">
+                </section>
+                <section>
+                <h2>Practical Hashing</h2>
+                <p class="fragment">Achieves the <b>first two</b> properties, but generally only the <b>first</b>.</p>
+                </section>
+                <section>
+                <h1>Yahoo: Plaintext</h1>
+                </section>
+                <section>
+                <h1>LinkedIn: SHA1</h1>
+                <p style="color:red; font-size:500%; text-align:center;" class="fragment"><a href="http://hashcat.net/hashcat/">Hashcat</a></p>
+                <pre class="fragment"><code class="bash">./hashcat-cli64.bin -a 2 -m 100 -o CRACKED_FILE HASH_FILE DICTIONARY_FILE</code></pre>
                 </section>
                 <section>
                 <h2>Keyloggers</h2>
@@ -121,22 +165,6 @@
                 <p style="text-align:justify;">We will use <a href="http://en.wikipedia.org/wiki/Sub7">Sub7</a>, an older trojan</p>
                 <p style="text-align:justify;">Download inside VM: <a href="http://gs9671.sp.cs.cmu.edu/lectures/lecture4/sub7.zip">http://goo.gl/jbHuH</a></p>
                 <p style="text-align:justify;"><a href="http://unremote.org/">DarkComet</a> tool, recently <a href="http://www.theregister.co.uk/2012/07/10/darkcomet_rat_killed_off/">famous</a>.</p>
-                </section>
-                <section>
-                <h2>End-Game Idea</h2>
-                <p style="text-align:justify;">A <b>honeypot</b> is a system placed online with explicit
-                security vulnerabilities.  It is designed to
-                <b>attract hackers</b> with two goals: <b>monitoring
-                their actions</b> and <b>capturing their tools</b>.</p>
-                <img src="../lecture3/honeypot.jpg">
-                </section>
-                <section>
-                <h2>Example Attack (gs9671)</h2>
-                <pre><code>Jun 30 23:21:24 gs9671 sshd[19668]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=burl-mse-71-255-157-150.static.ngn.east.myfairpoint.net  user=root
-Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): getting password (0x00000388)
-Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): pam_get_item returned a password
-Jun 30 23:21:24 gs9671 sshd[19668]: pam_winbind(sshd:auth): request wbcLogonUser failed: WBC_ERR_AUTH_ERROR, PAM error: PAM_USER_UNKNOWN (10), NTSTATUS: NT_STATUS_NO_SUCH_USER, Error message was: No such user
-</code></pre>
                 </section>
 			</div>
 		</div>
