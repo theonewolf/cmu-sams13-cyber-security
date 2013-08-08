@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Lecture 9: Making Machines Learn (2)</title>
+		<title>Lecture 9: Making Machines Learn (3)</title>
 
 		<meta name="description" content="Lesson 9 for SAMS 2013 CMU Class">
 		<meta name="author" content="Wolfgang Richter">
@@ -44,38 +44,21 @@
                 <img src="resolved.png">
                 </section>
                 <section>
-                <iframe width="560" height="315" src="http://www.youtube.com/embed/6ybd5rbQ5rU" frameborder="0" allowfullscreen></iframe> 
-                </section>
-                <section>
-                <h3>How the Open Source World Works</h3>
-                <br />
-                <div class="fragment">
-                <p style="text-align:left;"><span style="font-size:150%;">1. </span> Someone <a href="https://github.com/redis/hiredis/issues/120">notices a problem</a></p>
-                </div>
-                <br />
-                <div class="fragment">
-                <p style="text-align:left;"><span style="font-size:150%;">3. </span> The project maintainer <a href="https://github.com/redis/hiredis/commit/37a840dc2c0899e032e0fb05a0813e137a68f032">approves and commits it</a></p>
-                </div>
-                <br />
-                <div class="fragment">
-                <p style="text-align:left;"><span style="font-size:150%;">4. </span> [Optional] Project maintainer <a href="https://github.com/redis/hiredis/issues/183">proposes best solution</a> for the future</p>
-                </div>
-                <br />
-                <p style="text-align:left;" class="fragment">A <a href="https://github.com/cmusatyalab/GigaSight/pull/2">second example</a></p>
+                <h1>Posters and Presentations</h1>
                 </section>
 				<section>
 					<h1>Cyber Security</h1>
-					<h3>Making Machines Learn (2)</h3>
-					<p>
+					<h3>Making Machines Learn (3)</h3>
+					<p style="text-align:center;">
                     <a href="mailto:wolf@cs.cmu.edu">Wolfgang Richter</a>
 					</p>
-                    <p><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
+                    <p style="text-align:center;"><small>Built with <a href="http://lab.hakim.se/reveal-js/">reveal.js</a></small></p>
 				</section>
                 <section>
-                <h2>Today+Yesterday?</h2>
-                <p style="text-align:left; color:red;">Focus on: parameter estimation and deciding</p>
-                <p style="text-align:left;">Build a Python-based parameter estimator</p>
-                <p style="text-align:left;"><strong>Parameter:</strong> the probabilities we need to estimate to make a decision.</p>
+                <h2>Today</h2>
+                <p style="text-align:left; color:red;">Focus on: deciding</p>
+                <p style="text-align:left;">Build a Python-based decider</p>
+                <p style="text-align:left;">The <strong>decider</strong> implements a <strong>decision rule</strong>.</p>
                 </section>
                 <section>
                 <h2>Probability Notation</h2>
@@ -169,32 +152,46 @@
                 </div>
                 </section>
                 <section>
-                <h2>Create Counter in Python</h2>
+                <h2>Create Decider in Python</h2>
 <pre class="fragment"><code class="python">#!/usr/bin/env python
 import json
+from math import log
 from sys import argv
-USAGE = '''%s &lt;list of file names&gt;'''
+
+USAGE = '''%s &lt;class 1 counts&gt; &lt;class 2 counts&gt; &lt;query tokens file&gt;'''
+
 if __name__ == '__main__':
-    if len(argv) &lt; 2:
+    if len(argv) != 4:
         print USAGE % argv[0]
-        exit(1)
-</code></pre>
-<pre class="fragment"><code class="python">    total_examples = len(argv) - 1</code></pre>
-<pre class="fragment"><code class="python">    counts = {}</code></pre>
-<pre class="fragment"><code class="python">    counts['total_examples'] = total_examples</code></pre>
-<pre class="fragment"><code class="python">    for i in xrange(1, len(argv), 1):</code></pre>
-<pre class="fragment"><code class="python">        with open(argv[i]) as f:</code></pre>
-<pre class="fragment"><code class="python">            tokens = json.load(f)</code></pre>
-<pre class="fragment"><code class="python">            for token in tokens:</code></pre>
-<pre class="fragment"><code class="python">                counts[token] = counts.get(token, 0) + 1</code></pre>
-<pre class="fragment"><code class="python">    print json.dumps(counts)</code></pre>
+        exit(1)</code></pre>
+<pre class="fragment"><code class="python">    with open(argv[1]) as class1f:
+        class1counts = json.load(class1f)
+    with open(argv[2]) as class2f:
+        class2counts = json.load(class2f)
+    with open(argv[3]) as queryf:
+        queryf_tokens = json.load(queryf)</code></pre>
+<pre class="fragment"><code class="python">    class1count = class1counts['total_examples']
+    class2count = class2counts['total_examples']</code></pre>
+<pre class="fragment"><code class="python">    class1log = log(class1count)
+    class2log = log(class2count)</code></pre>
+<pre class="fragment"><code class="python">    for token in queryf_tokens:
+        class1log += log(float(class1counts.get(token, 1)) / class1count)
+        class2log += log(float(class2counts.get(token, 1)) / class2count)</code></pre>
+</section>
+<section>
+<pre class="fragment"><code class="python">    result = { 'log(p1)' : class1log,
+               'log(p2)' : class2log,
+               'file'    : argv[3] }</code></pre>
+<pre class="fragment"><code class="python">    if class1log &gt; class2log:
+        result['chosen_class'] = 1
+    else:
+        result['chosen_class'] = 2</code></pre>
+<pre class="fragment"><code class="python">    print json.dumps(result)</code></pre>
             </section>
             <section>
-            <h2>Run the Counter</h2>
-<pre class="fragment"><code class="bash">./nbayes_counter.py ham_extracted/*.json > ham_extracted/counts.json</code></pre>
+            <h2>Run the Decider</h2>
+<pre class="fragment"><code class="bash">./nbayes_decider.py ham_counts.json spam_counts.json spam_extracted/TRAIN_XXXXX.eml</code></pre>
             </section>
-            <section>
-            <h2>Decisions, decisions...</h2>
 			</div>
 		</div>
 
