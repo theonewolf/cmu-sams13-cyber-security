@@ -13,7 +13,9 @@ hidden data.
 ## Syllabus
 
 This is a living document and not finalized (it may even change during the
-course).
+course). Every lecture is designed for a 2 hour timeslot, I generally split
+them into 45 minutes - 1 hour 15 minutes of lecturing and the rest is hands-on
+lab work.
 
 <table>
     <tr><td>Day 1</td><td><a href="https://rawgithub.com/theonewolf/cmu-sams13-cyber-security/master/lectures/lecture1/lecture1.html">Overview and Tools of the Trade</a></td></tr>
