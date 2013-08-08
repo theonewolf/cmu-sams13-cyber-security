@@ -18,7 +18,7 @@ course).
 <table>
     <tr><td>Day 1</td><td><a href="https://rawgithub.com/theonewolf/cmu-sams13-cyber-security/master/lectures/lecture1/lecture1.html">Overview and Tools of the Trade</a></td></tr>
     <tr><td>Day 2</td><td><a href="https://rawgithub.com/theonewolf/cmu-sams13-cyber-security/master/lectures/lecture2/lecture2.html">Passwords, Hashing, Rainbow Tables, and Cracking</td></tr>
-    <tr><td>Day 3</td><td><a href="https://rawgithub.com/theonewolf/cmu-sams13-cyber-security/master/lectures/lecture3/lecture3.html">Hands-On Cracking and Experimental Setup</td></tr>
+    <tr><td>Day 3</td><td><a href="https://rawgithub.com/theonewolf/cmu-sams13-cyber-security/master/lectures/lecture3/lecture3.html">Hands-On Cracking and Hashing</td></tr>
     <tr><td>day 4</td><td><a href="https://rawgithub.com/theonewolf/cmu-sams13-cyber-security/master/lectures/lecture4/lecture4.html">Viruses, Backdoors, and Stealing What's not Yours</td></tr>
     <tr><td>Day 5</td><td><a href="https://rawgithub.com/theonewolf/cmu-sams13-cyber-security/master/lectures/lecture5/lecture5.html">Networking Terms, Tools, and Attacks</td></tr>
     <tr><td>Day 6</td><td><a href="https://rawgithub.com/theonewolf/cmu-sams13-cyber-security/master/lectures/lecture6/lecture6.html">Defense Against the Dark Arts: Tools</td></tr>
