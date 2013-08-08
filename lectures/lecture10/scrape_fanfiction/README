@@ -1,0 +1,9 @@
+Best recorded with an example pipeline usage:
+
+mkdir Harry-Potter
+./generate_curl_index.py Harry-Potter 1000
+./generate_curl_chapters.py Harry-Potter Harry-Potter/index_*.html > get_chapters.bash
+vim get_chapters.bash
+chmod +x get_chapters.bash
+./get_chapters.bash
+
